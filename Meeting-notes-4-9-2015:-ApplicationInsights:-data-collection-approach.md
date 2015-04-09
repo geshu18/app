@@ -27,62 +27,63 @@ Every telemetry item should be associated with the list of context-specific prop
 
 This is how we initialize application insights today:
 ```
-        public static void AddApplicationInsightsTelemetry(this IServiceCollection services, IConfiguration config)
-        {
-            ActiveConfigurationManager.AddInstrumentationKey(TelemetryConfiguration.Active, config);
+public static void AddApplicationInsightsTelemetry(this IServiceCollection services, IConfiguration config)
+{
+  ActiveConfigurationManager.AddInstrumentationKey(TelemetryConfiguration.Active, config);
 
-            services.AddSingleton((svcs) => {
-                ActiveConfigurationManager.AddTelemetryInitializers(TelemetryConfiguration.Active, svcs);
-                ActiveConfigurationManager.AddContextInitializers(TelemetryConfiguration.Active);
+  services.AddSingleton((svcs) => {
+    ActiveConfigurationManager.AddTelemetryInitializers(TelemetryConfiguration.Active, svcs);
+    ActiveConfigurationManager.AddContextInitializers(TelemetryConfiguration.Active);
 
-                return new TelemetryClient();
-            });
+    return new TelemetryClient();
+  });
 
-            services.AddScoped<RequestTelemetry>((svcs) => {
-                var rt = new RequestTelemetry();
-                // this is workaround to inject proper instrumentation key into javascript:
-                rt.Context.InstrumentationKey = svcs.GetService<TelemetryClient>().Context.InstrumentationKey;
-                return rt;
-            });
-        }
+  services.AddScoped<RequestTelemetry>((svcs) => {
+    var rt = new RequestTelemetry();
+    // this is workaround to inject proper instrumentation key into javascript:
+    rt.Context.InstrumentationKey = svcs.GetService<TelemetryClient>().Context.InstrumentationKey;
+    return rt;
+  });
+}
 ```
 
 Here is how telemetry initializer will look like:
 ```
-    public class ClientIpHeaderTelemetryInitializer : ITelemetryInitializer
+public class ClientIpHeaderTelemetryInitializer : ITelemetryInitializer
+{
+  public ClientIpHeaderTelemetryInitializer(IHttpContextAccessor httpContextAccessor)
+    : base(httpContextAccessor)
+  {
+    this.httpContextAccessor = httpContextAccessor;
+  }
+
+  public void Initialize(ITelemetry telemetry)
+  {
+    var context = this.httpContextAccessor.Value;
+
+    if (context == null)
     {
-        public ClientIpHeaderTelemetryInitializer(IHttpContextAccessor httpContextAccessor)
-             : base(httpContextAccessor)
-        {
-            this.httpContextAccessor = httpContextAccessor;
-        }
+      //TODO: Diagnostics!
+      return;
+    }
 
-        public void Initialize(ITelemetry telemetry)
-        {
-                var context = this.httpContextAccessor.Value;
+    if (context.RequestServices == null)
+    {
+      //TODO: Diagnostics!
+      return;
+    }
 
-                if (context == null)
-                {
-                    //TODO: Diagnostics!
-                    return;
-                }
+    var request = context.RequestServices.GetService<RequestTelemetry>();
 
-                if (context.RequestServices == null)
-                {
-                    //TODO: Diagnostics!
-                    return;
-                }
+    if (request == null)
+    {
+      //TODO: Diagnostics!
+       return;
+     }
 
-                var request = context.RequestServices.GetService<RequestTelemetry>();
-
-                if (request == null)
-                {
-                    //TODO: Diagnostics!
-                    return;
-                }
-
-                this.OnInitializeTelemetry(context, request, telemetry);
-        }
+     this.OnInitializeTelemetry(context, request, telemetry);
+  }
+}
 ```
 
 
@@ -100,10 +101,10 @@ Routes
 Here is how a request-scoped component can access MVC route data. This is an injection constructor, but it can also be resolved from ```HttpContext.RequestServices``` service provider.
 
 ```
-        public MyComponent(IScopedInstance<ActionContext> actionContextAccessor)
-        {
-            RouteData foo = actionContextAccessor.Value.RouteData;
-        }
+public MyComponent(IScopedInstance<ActionContext> actionContextAccessor)
+{
+  RouteData foo = actionContextAccessor.Value.RouteData;
+}
 ```
 
 The code that makes it possible is in the ```InvokeActionAsync``` method of the ```MvcRouteHandler```. 
