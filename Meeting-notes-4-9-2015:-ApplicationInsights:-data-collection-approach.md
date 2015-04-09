@@ -217,7 +217,33 @@ public class OperationNameInitializer : ITelemetryInitializer
     }
 }
 ```
-
+Request-scoped Telemetry Modules
+```
+public class RequestTelemetryMiddleware
+{
+    readonly RequestDelegate next;
+    public RequestTelemetryMiddleware(RequestDelegate next)
+    {
+        this.next = next;
+    }
+    public async Task Invoke(HttpContext context, ITelemetryClient client)
+    {
+        Stopwatch stopwatch = Stopwatch.StartNew();
+        await this.next(context);
+        var request = new RequestTelemetry();
+        request.Duration = stopwatch.Elapsed;
+        request.ResponseCode = context.Response.StatusCode.ToString();
+        client.Track(request);
+    }
+}
+```
+Open Questions
+```
+- How to access application and request scoped services in 
+    - Application-scoped Telemetry Modules (UnobservedTaskException)
+    - Logging adapters (Trace.Listener, NLog.Target, Log4Net.Appender) 
+- How to remove from services?
+```
 
 Routes
 ------
