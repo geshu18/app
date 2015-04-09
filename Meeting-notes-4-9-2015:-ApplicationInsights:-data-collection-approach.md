@@ -25,6 +25,12 @@ telemetry.TrackEvent("WinGame");
 
 Every telemetry item should be associated with the list of context-specific properties. We are using mechanism of telemetry initializers to accomplish that. List of telemetry initializers is a property of ```TelemetryConfiguration.Active```.
 
+```
+// TODO: Register if customer did not register
+app.UseRequestServices();
+```
+
+
 This is how we initialize application insights today:
 ```
 public static void AddApplicationInsightsTelemetry(this IServiceCollection services, IConfiguration config)
@@ -86,13 +92,131 @@ public class ClientIpHeaderTelemetryInitializer : ITelemetryInitializer
 }
 ```
 
+DI-based API
+------------
 
+Typical Usage
+```
+public class AccountController : Controller
+{
+    readonly ITelemetryClient telemetryClient;
+    public AccountController(ITelemetryClient telemetryClient)
+    {
+        this.telemetryClient = telemetryClient;
+    }
+    public IActionResult Login()
+    {
+        this.telemetryClient.TrackEvent("User logged in");
+        return View();
+    }
+}
+```
+
+Usage API
+```
+public interface ITelemetryClient
+{
+    void Track(ITelemetry telemetry);
+}
+public interface ITelemetry
+{
+    string InstrumentationKey { get; set; }
+    TelemetryContext Context { get; }
+}
+public static class TelemetryExtensions
+{
+    public static void TrackEvent(this ITelemetryClient client, string name)
+    {
+        client.Track(new EventTelemetry { Name = name });
+    }
+}
+public class EventTelemetry : ITelemetry
+{
+    public string InstrumentationKey { get; set; }
+    public TelemetryContext Context { get; }
+    public string Name { get; set; }
+}
+public class TelemetryContext
+{
+    public DeviceContext Device { get; }
+    public OperationContext Operation { get; }
+}
+public class DeviceContext
+{
+    public string OSVersion { get; set; }
+}
+public class OperationContext
+{
+    public string Name { get; set; }
+}
+```
+Configuration
 
 ```
-// TODO: Register if customer did not register
-app.UseRequestServices();
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddInstance<ITelemetryInitializer>(new InstrumentationKeyInitializer("YOUR KEY"));
+        services.AddSingleton<ITelemetryChannel, InMemoryTelemetryChannel>();
+        services.AddSingleton<ITelemetryInitializer, OSVersionInitializer>();
+        services.AddScoped<ITelemetryInitializer, OperationNameInitializer>();
+        services.AddScoped<ITelemetryClient, TelemetryClient>();
+    }
+
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory lf)
+    {
+        app.UseMiddleware<RequestTelemetryMiddleware>();
+    }
+}
+```
+Implementation
+
+```
+public class TelemetryClient : ITelemetryClient
+{
+    readonly ITelemetryChannel channel;
+    readonly IEnumerable<ITelemetryInitializer> initializers;
+    public TelemetryClient(ITelemetryChannel channel, IEnumerable<ITelemetryInitializer> initializers)
+    {
+        this.channel = channel;
+        this.initializers = initializers;
+    }
+    public void Track(ITelemetry telemetry)
+    {
+        foreach (ITelemetryInitializer initializer in this.initializers)
+            initializer.Initialize(telemetry);
+        this.channel.Send(telemetry);
+    }
+}
 ```
 
+Application-scoped Telemetry Initializers
+```
+public class OSVersionInitializer : ITelemetryInitializer
+{
+    public void Initialize(ITelemetry telemetry)
+    {
+        telemetry.Context.Device.OSVersion = Environment.OSVersion.VersionString;
+    }
+}
+```
+
+Request-scoped Telemetry Initializers
+```
+public class OperationNameInitializer : ITelemetryInitializer
+{
+    readonly IScopedInstance<ActionContext> actionContextAccessor;
+    public OperationNameInitializer(IScopedInstance<ActionContext> actionContextAccessor)
+    {
+        this.actionContextAccessor = actionContextAccessor;
+    }
+    public void Initialize(ITelemetry telemetry)
+    {
+        telemetry.Context.Operation.Name = this.actionContextAccessor.Value.RouteData;
+    }
+}
+```
 
 
 Routes
