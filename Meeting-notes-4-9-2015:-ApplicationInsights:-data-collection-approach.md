@@ -1,4 +1,5 @@
 Agenda:
+
 1. DI design and Application Insights:
   a. What is currently implemented
   b. Discuss what we plan to implement
