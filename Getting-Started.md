@@ -1,0 +1,1 @@
+Here is getting started information on how to onboard to Application Insights
