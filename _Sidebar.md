@@ -2,7 +2,7 @@ Documentation
 
 - [Getting started](https://github.com/Microsoft/AppInsights-aspnetv5/wiki/Getting-Started)
 - [Configure](https://github.com/Microsoft/AppInsights-aspnetv5/wiki/Configure)
-- [Report custom telemetry](https://github.com/Microsoft/AppInsights-aspnetv5/wiki/Report-Custom-Telemetry)
+
 
 
 
