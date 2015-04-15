@@ -7,4 +7,4 @@ Documentation
 
 
 Meeting notes
-- [4/13/2015 AI Data Collection](https://github.com/Microsoft/AppInsights-aspnetv5/wiki/4-13-2015-AI-data-collection-approach)
+- [4/13/2015 AI Data Collection](https://github.com/Microsoft/AppInsights-aspnetv5/wiki/4-14-2015-AI-data-collection-approach)
