@@ -13,6 +13,30 @@ Agenda:
 4. Ship next week (without core support) - CTP6 or RC?
 5. Build/test infra best practices
 
+Feedback
+--------
+**Integration points feedback**
+- Do not make Extension Method on app builder to set "Developer Mode". Instead move this logic to ConfigureServices's Application Insights initialization code
+[Issue](https://github.com/Microsoft/AppInsights-aspnetv5/issues/24)
+- Option: Do not use @Html helper in Layout.cshtml, use extension method instead to get rid of using statement. Also consider to not pass any parameters if RequestTelemetry object will be passed to to this extension method
+[Issue](https://github.com/Microsoft/AppInsights-aspnetv5/issues/25)
+- Split application insights into two packages - one with MVC reference, one without.
+[Issue](https://github.com/Microsoft/AppInsights-aspnetv5/issues/26)
+
+**Feedback on DI approach**
+- In general what we did looks Ok.
+- If we want to associate context with trace statements outside of DI model of Asp.Net v5 (e.g. statis Trace statements) we need to use LocalAsync to carry Application Insights context thru the request.
+
+**Routung feedback**
+It is not new request to get routing information genericly. (Glimpse is an example). Asp.Net team will consider making this change, but unlikely it will happen before RTM.
+
+**Demo feedback**
+- Ability to filter out (not send) long running requests [Issue](https://github.com/Microsoft/AppInsights-aspnetv5/issues/27)
+- It will be great to collect traces from ILogger
+
+**Other**
+We will follow up separately on other topics like CI
+
 
 Current DI design
 -----------------
@@ -239,9 +263,9 @@ public class RequestTelemetryMiddleware
 ```
 Open Questions
 ```
-- How to access application and request scoped services in 
+- How to access application and request scoped services in
     - Application-scoped Telemetry Modules (UnobservedTaskException)
-    - Logging adapters (Trace.Listener, NLog.Target, Log4Net.Appender) 
+    - Logging adapters (Trace.Listener, NLog.Target, Log4Net.Appender)
 - How to remove from services?
 ```
 
@@ -257,10 +281,8 @@ public MyComponent(IScopedInstance<ActionContext> actionContextAccessor)
 }
 ```
 
-The code that makes it possible is in the ```InvokeActionAsync``` method of the ```MvcRouteHandler```. 
+The code that makes it possible is in the ```InvokeActionAsync``` method of the ```MvcRouteHandler```.
 
 Notice, however, that ```ActionContext``` is MVC specific while ```RouteData``` is not. Ideally we’d want to avoid MVC dependencies and support other One ASP.NET frameworks, like WebForms, Dynamic Data, Web Pages, all of which support modern URL routing and would be a subject to the same cardinality problems with our service.
 
 Ideally, I think that we want to work with the ASP.NET team and implement this in the ```RouterMiddleware``` so that we can access ```IScopedInstance<RouteContext>``` in our components instead of relying on platform-specific workarounds.
-
-
