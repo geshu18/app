@@ -10,7 +10,7 @@ CPU: 6 Cores 3.2. GHz
 OS: Windows Server 2012 R2 Standard x64
 ```
 ```
-Components: Web Server/Application Server: IIS/.NET 4.0/4.5
+Components: Web Server/Application Server: IIS/.NET 4.0/4.5/4.6
 ```
 # AI SDK version
 
