@@ -40,6 +40,26 @@ Test run is 10 minutes with 1 minute warm up interval.
 ## Experiment 4 
 Test noise when application throws exceptions on 5% requests. 
 
+**Baseline**
+			
+Box CPU|w3wp CPU|RPS|RPS/CPU
+--------|--------|--------|--------
+85.1 | 499 | 84.1 | 0.168537074
+85.1 | 499 | 84 | 0.168336673
+84.9 | 499 | 84.2 | 0.168737475
+
+			
+**Performance Run**			
+
+Box CPU|w3wp CPU|RPS|RPS/CPU
+--------|--------|--------|--------
+83.1 | 498 | 83.9 | 0.168473896
+84.1 | 499 | 84.1 | 0.168537074
+85.3 | 499 | 84 | 0.168336673
+
+**Noise:	0.052130838**
+
+
 ## Experiment 5
 One web test is used that calls the page that emulates some activity for 50 milliseconds.
 ([LoadTest](https://github.com/Microsoft/ApplicationInsights-aspnetv5/blob/master/test/PerfTest/PerfTest/DoRequestLoad.loadtest))
