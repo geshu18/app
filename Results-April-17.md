@@ -40,4 +40,14 @@ Test run is 10 minutes with 1 minute warm up interval.
 ## Experiment 4 
 Test noise when application throws exceptions on 5% requests. 
 
+## Experiment 5
+One web test is used that calls the page that emulates some activity for 50 milliseconds.
+([LoadTest](https://github.com/Microsoft/ApplicationInsights-aspnetv5/blob/master/test/PerfTest/PerfTest/DoRequestLoad.loadtest))
+
+Test run is 72 hours.
+
+**Results**
+
+No memory leaks or crashes were detected. No changes in RPS pattern or CPU spikes were observed. 
+
 
