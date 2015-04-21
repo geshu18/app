@@ -3,7 +3,10 @@
 Used prerelease version complied in release from master 4/17/2015
 
 # Load test results:
-Activity internal was 50 milliseconds.
+## Experiment 1 
+One web test is used that calls the page that emulates some activity for 50 milliseconds.
+([LoadTest](https://github.com/Microsoft/ApplicationInsights-aspnetv5/blob/master/test/PerfTest/PerfTest/DoRequestLoad.loadtest))
+50 ms is chosen as it is an average of all times from all customers we have right now.
 Test run is 10 minutes with 1 minute warm up interval.
 
 **Baseline**
@@ -23,3 +26,18 @@ Box CPU|w3wp CPU|RPS|RPS/CPU
 83.8|497|79.6|0.160160966
 
 **Noise:	0.078052036**
+
+## Experiment 2 
+Same test but controller emulates activity for 10 ms 
+10 ms is chosen because 50 percentile of all times from all customers is less than 10ms right now.
+Test run is 10 minutes with 1 minute warm up interval.
+
+## Experiment 3 
+Test noise when application throws exceptions on 30% requests. 
+30% unhandled exceptions is very high for a real application. The goal is to check that if an application does not perform well AI does not completely kill it.
+Test run is 10 minutes with 1 minute warm up interval.
+
+## Experiment 4 
+Test noise when application throws exceptions on 5% requests. 
+
+
