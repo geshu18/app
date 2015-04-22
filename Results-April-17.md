@@ -30,12 +30,31 @@ Box CPU|w3wp CPU|RPS|RPS/CPU
 ## Experiment 2 
 Same test but controller emulates activity for 10 ms 
 10 ms is chosen because 50 percentile of all times from all customers is less than 10ms right now.
-Test run is 10 minutes with 1 minute warm up interval.
+Test run is 10 minutes with 2 minute warm up interval.
 
 ## Experiment 3 
 Test noise when application throws exceptions on 30% requests. 
 30% unhandled exceptions is very high for a real application. The goal is to check that if an application does not perform well AI does not completely kill it.
-Test run is 10 minutes with 1 minute warm up interval.
+Test run is 10 minutes with 2 minute warm up interval.
+
+**Baseline**
+			
+Box CPU|w3wp CPU|RPS|RPS/CPU
+--------|--------|--------|--------
+83.4 | 499 | 114 | 0.228456914
+83.5 | 499 | 114 | 0.228456914
+83.5 | 500 | 114 | 0.228
+
+			
+**Performance Run**			
+
+Box CPU|w3wp CPU|RPS|RPS/CPU
+--------|--------|--------|--------
+85.3 | 499 | 114 | 0.228456914
+85.2 | 499 | 114 | 0.228456914
+83.5 | 500 | 113 | 0.226
+
+**Noise:	0.292007537**
 
 ## Experiment 4 
 Test noise when application throws exceptions on 5% requests. 
