@@ -1,5 +1,3 @@
-Add NuGet feed http://appinsights-aspnet.azurewebsites.net/nuget/. It has NuGet: Microsoft.ApplicationInsights.AspNet. 
-
 Currently NuGet built against VS 2015 RC.
 
 For standard Asp.Net template you need to modify four files (this will be the default template instrumentation in future).
