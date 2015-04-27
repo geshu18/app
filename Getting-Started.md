@@ -9,7 +9,7 @@ Add new reference:
 ```
 
 ***config.json*** 
-Configure instrumentation key:
+Configure instrumentation key. You need azure subscription to get instrumentation key. [This instruction](http://azure.microsoft.com/en-us/documentation/articles/app-insights-java-get-started/) explains how to get instrumentation key:
 ```
  "ApplicationInsights": {
  	"InstrumentationKey": "11111111-2222-3333-4444-555555555555"
@@ -17,12 +17,12 @@ Configure instrumentation key:
 ```
 
 ***Startup.cs***
-Add service:
+In the method ```ConfigureServices``` add Application Insights service. You'll need to add namespace ```Microsoft.ApplicationInsights.AspNet``` in the using list:
 ```
 services.AddApplicationInsightsTelemetry(Configuration);
 ```
 
-Add middleware and configure developer mode: 
+In the method ```Configure``` add application insights request and exception tracking middleware. Please note that request tracking middleware should be added very as a very first middleware in pipeline, exception middleware should be added after error page and any other error handling middleware:
 
 ```
 // Add Application Insights monitoring to the request pipeline as a very first middleware.
@@ -39,14 +39,14 @@ app.UseApplicationInsightsExceptionTelemetry();
 ```
 
 ***_Layout.cshtml***
-Define using and injection:
+Define using and injection in the very top of the file:
 
 ```
 @using Microsoft.ApplicationInsights.AspNet
 @inject Microsoft.ApplicationInsights.DataContracts.RequestTelemetry RequestTelelemtry
 ```
 
-And insert HtmlHelper to the end of ```<head>``` section:
+And insert HtmlHelper to the end of ```<head>``` section. Any custom javascript telemetry you want to report from the page should be injected after this snippet:
 
 ```
 	@Html.ApplicationInsightsJavaScriptSnippet(RequestTelelemtry.Context.InstrumentationKey);
