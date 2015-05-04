@@ -1,12 +1,12 @@
 For standard Asp.Net template you need to modify four files (this will be the default template instrumentation in future).
 
-***project.json*** 
+##project.json
 Add new reference:
 ```
 "Microsoft.ApplicationInsights.AspNet": "0.31.0-beta4"
 ```
 
-***config.json*** 
+##config.json
 Configure instrumentation key. You need azure subscription to get instrumentation key. [This instruction](http://azure.microsoft.com/en-us/documentation/articles/app-insights-java-get-started/) explains how to get instrumentation key:
 ```
  "ApplicationInsights": {
@@ -14,7 +14,7 @@ Configure instrumentation key. You need azure subscription to get instrumentatio
  }
 ```
 
-***Startup.cs***
+##Startup.cs
 In the method ```Startup``` make sure to set Application Insights settings overrides. Specifically, set developer mode to true in development environment:
 
 ```
@@ -42,7 +42,7 @@ Exception middleware should be added after error page and any other error handli
 app.UseApplicationInsightsExceptionTelemetry();
 ```
 
-***_Layout.cshtml***
+##_Layout.cshtml
 Define using and injection in the very top of the file:
 
 ```
