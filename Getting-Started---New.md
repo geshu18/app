@@ -46,12 +46,12 @@ app.UseApplicationInsightsExceptionTelemetry();
 Define using and injection in the very top of the file:
 
 ```
-@inject Microsoft.ApplicationInsights.AspNet.JavaScript.IJavaScriptSnippet ApplicationInsightsJavaScript
+@inject Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration TelemetryConfiguration 
 ```
 
-And insert HtmlHelper to the end of ```<head>``` section. Any custom javascript telemetry you want to report from the page should be injected after this snippet:
+And insert HtmlHelper to the end of ```<head>``` section but before any other script. Any custom javascript telemetry you want to report from the page should be injected after this snippet:
 
 ```
-	@Html.Raw(ApplicationInsightsJavaScript.Write()) 
+	@Html.ApplicationInsightsJavaScript(TelemetryConfiguration) 
 </head>
 ```
