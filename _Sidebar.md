@@ -1,9 +1,9 @@
 Documentation
-- [Getting started](https://github.com/Microsoft/AppInsights-aspnet5/wiki/Getting-Started)
-- [Configure](https://github.com/Microsoft/AppInsights-aspnet5/wiki/Configure)
+- [Getting started](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Getting-Started)
+- [Configure](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Configure)
 
 Development
-- [Testing](https://github.com/Microsoft/AppInsights-aspnet5/wiki/Testing)
+- [Testing](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Testing)
 
 Meeting notes
 - [4/13/2015 AI Data Collection](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/April-14,-2015.-AI-data-collection-approach)
