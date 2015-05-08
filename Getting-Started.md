@@ -29,7 +29,7 @@ In the method ```ConfigureServices``` add Application Insights service. You'll n
 services.AddApplicationInsightsTelemetry(Configuration);
 ```
 
-In the method ```Configure``` add application insights request and exception tracking middleware. Please note that request tracking middleware should be added very as a very first middleware in pipeline:
+In the method ```Configure``` add Application Insights request and exception tracking middleware. Please note that request tracking middleware should be added very as a very first middleware in pipeline:
 
 ```
 // Add Application Insights monitoring to the request pipeline as a very first middleware.
