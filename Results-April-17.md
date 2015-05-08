@@ -5,7 +5,7 @@ Used prerelease version complied in release from master 4/17/2015
 # Load test results:
 ## Experiment 1 
 One web test is used that calls the page that emulates some activity for 50 milliseconds.
-([LoadTest](https://github.com/Microsoft/ApplicationInsights-aspnetv5/blob/master/test/PerfTest/PerfTest/DoRequestLoad.loadtest))
+([LoadTest](https://github.com/Microsoft/ApplicationInsights-aspnet5/blob/master/test/PerfTest/PerfTest/DoRequestLoad.loadtest))
 50 ms is chosen as it is an average of all times from all customers we have right now.
 Test run is 10 minutes with 1 minute warm up interval.
 
@@ -102,7 +102,7 @@ Box CPU|w3wp CPU|RPS|RPS/CPU
 
 ## Experiment 5
 One web test is used that calls the page that emulates some activity for 50 milliseconds.
-([LoadTest](https://github.com/Microsoft/ApplicationInsights-aspnetv5/blob/master/test/PerfTest/PerfTest/DoRequestLoad.loadtest))
+([LoadTest](https://github.com/Microsoft/ApplicationInsights-aspnet5/blob/master/test/PerfTest/PerfTest/DoRequestLoad.loadtest))
 
 Test run is 72 hours.
 

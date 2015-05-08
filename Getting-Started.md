@@ -1,4 +1,4 @@
-For standard Asp.Net template you need to modify four files (this will be the default template instrumentation in future) - add Application Insights NuGet package, configure it, initialize and inject tracking javascript on base layout.
+For standard ASP.NET 5 template you need to modify four files (this will be the default template instrumentation in future) - add Application Insights NuGet package, configure it, initialize and inject tracking javascript on base layout.
 
 ##project.json
 Add new reference:
