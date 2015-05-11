@@ -25,19 +25,19 @@ if (env.IsEnvironment("Development"))
 ```
 
 In the method ```ConfigureServices``` add Application Insights service. You'll need to add namespace ```Microsoft.ApplicationInsights.AspNet``` in the using list:
-```
+``` c#
 services.AddApplicationInsightsTelemetry(Configuration);
 ```
 
 In the method ```Configure``` add Application Insights request and exception tracking middleware. Please note that request tracking middleware should be added very as a very first middleware in pipeline:
 
-```
+``` c#
 // Add Application Insights monitoring to the request pipeline as a very first middleware.
 app.UseApplicationInsightsRequestTelemetry();
 ```
 Exception middleware should be added after error page and any other error handling middleware:
 
-```
+``` c#
 // Add Application Insights exceptions handling to the request pipeline.
 app.UseApplicationInsightsExceptionTelemetry();
 ```
@@ -45,13 +45,13 @@ app.UseApplicationInsightsExceptionTelemetry();
 ##_Layout.cshtml
 Define using and injection in the very top of the file:
 
-```
+``` html
 @inject Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration TelemetryConfiguration 
 ```
 
 And insert HtmlHelper to the end of ```<head>``` section but before any other script. Any custom javascript telemetry you want to report from the page should be injected after this snippet:
 
-```
+``` html
 	@Html.ApplicationInsightsJavaScript(TelemetryConfiguration) 
 </head>
 ```
