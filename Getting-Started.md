@@ -2,13 +2,13 @@ For standard ASP.NET 5 template you need to modify four files (this will be the 
 
 ##project.json
 Add new reference:
-```
+``` json
 "Microsoft.ApplicationInsights.AspNet": "0.32.0-beta4"
 ```
 
 ##config.json
 Configure instrumentation key. You need azure subscription to get instrumentation key. [This instruction](http://azure.microsoft.com/en-us/documentation/articles/app-insights-java-get-started/) explains how to get instrumentation key:
-```
+``` json
  "ApplicationInsights": {
  	"InstrumentationKey": "11111111-2222-3333-4444-555555555555"
  }
@@ -17,7 +17,7 @@ Configure instrumentation key. You need azure subscription to get instrumentatio
 ##Startup.cs
 In the method ```Startup``` make sure to set Application Insights settings overrides. Specifically, set developer mode to true in development environment:
 
-```
+``` C#
 if (env.IsEnvironment("Development"))
 {
     configuration.AddApplicationInsightsSettings(developerMode: true);
