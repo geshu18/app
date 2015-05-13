@@ -67,6 +67,7 @@ Exception middleware should be added after error page and any other error handli
 // Add Application Insights exceptions handling to the request pipeline.
 app.UseApplicationInsightsExceptionTelemetry();
 ```
+If you don't have any error handling middleware defined, just add this method right after UseApplicationInsightsRequestTelemetry method.
 
 ##_Layout.cshtml
 Define using and injection in the very top of the file:
