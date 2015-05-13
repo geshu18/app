@@ -8,11 +8,7 @@ Add new entry in dependencies section:
 
 ##config.json
 If config.json file is not already part of your application, create it on the root level of your project.
-Then add the following dependency entries to your project.json if they are not defined there already.
-``` json
-    "Microsoft.Framework.ConfigurationModel.Interfaces": "1.0.0-beta4",
-    "Microsoft.Framework.ConfigurationModel.Json":  "1.0.0-beta4"
-```
+
 Configure instrumentation key. You need azure subscription to get instrumentation key. [This instruction](http://azure.microsoft.com/en-us/documentation/articles/app-insights-java-get-started/) explains how to get instrumentation key:
 Once you have your instrumentation key, add the following section in the root of your config.json file.
 ``` json
@@ -25,6 +21,12 @@ Once you have your instrumentation key, add the following section in the root of
 If you don't already have the code that parses config.json file and initializes configuration variable, create Configuration variable
 ``` C#
 public IConfiguration Configuration { get; set; }
+```
+
+Then add the following dependency entries to your project.json if they are not defined there already.
+``` json
+    "Microsoft.Framework.ConfigurationModel.Interfaces": "1.0.0-beta4",
+    "Microsoft.Framework.ConfigurationModel.Json":  "1.0.0-beta4"
 ```
 
 Then add the code that parses configuration if you don't have it already.
