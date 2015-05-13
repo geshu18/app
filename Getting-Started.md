@@ -1,21 +1,30 @@
-For standard ASP.NET 5 template you need to modify four files (this will be the default template instrumentation in future) - add Application Insights NuGet package, configure it, initialize and inject tracking javascript on base layout.
+For web applications created from the standard ASP.NET 5 project template in Visual Studio 2015 RC, you need to make the following changes 
+- Add Application Insights NuGet package dependency to `project.json`
+- Add Application Insights instrumentation key to the `config.json`
+- Add Application Insights instrumentation code to the `startup.cs`
+- Add Application Insights JavaScript instrumentation to the `_Layout.cshtml`
 
-##project.json
-Add new entry in dependencies section:
+## project.json
+Add the following entry to the `dependencies`` section. 
 ``` json
-"Microsoft.ApplicationInsights.AspNet": "0.32.0-beta4"
+{
+  "dependencies": {
+    "Microsoft.ApplicationInsights.AspNet": "0.32.0-beta4"
+  }
+}
 ```
 
-##config.json
-If config.json file is not already part of your application, create it on the root level of your project.
-
-Configure instrumentation key. You need azure subscription to get instrumentation key. [This instruction](http://azure.microsoft.com/en-us/documentation/articles/app-insights-java-get-started/) explains how to get instrumentation key:
-Once you have your instrumentation key, add the following section in the root of your config.json file.
+## config.json
+Add the instrumentation key of an existing Application Insights web application resource to the `ApplicationInsights` section of the `config.json`. 
 ``` json
- "ApplicationInsights": {
- 	"InstrumentationKey": "11111111-2222-3333-4444-555555555555"
- }
+{
+  "ApplicationInsights": {
+    "InstrumentationKey": "11111111-2222-3333-4444-555555555555"
+  }
+}
 ```
+
+If you don't have the instrumentation key, follow instructions on this [page](http://azure.microsoft.com/en-us/documentation/articles/app-insights-start-monitoring-app-health-usage) to get it.
 
 ##Startup.cs
 If you don't already have the code that parses config.json file and initializes configuration variable, create Configuration variable
