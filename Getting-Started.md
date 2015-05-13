@@ -78,7 +78,7 @@ app.UseApplicationInsightsExceptionTelemetry();
 ```
 If you don't have any error handling middleware defined, just add this method right after UseApplicationInsightsRequestTelemetry method.
 
-##_Layout.cshtml
+##_Layout.cshtml (if present)
 Define using and injection in the very top of the file:
 
 ``` html
