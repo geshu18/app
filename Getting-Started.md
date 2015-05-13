@@ -18,6 +18,21 @@ Once you have your instrumentation key, add the following section in the root of
 ```
 
 ##Startup.cs
+If you don't already have the code that parses config.json file and initializes configuration variable, create Configuration variable
+``` C#
+public IConfiguration Configuration { get; set; }
+```
+
+ add it to your Startup method:
+
+``` C#
+  // Setup configuration sources.
+            var configuration = new Configuration()
+                .AddJsonFile("config.json")
+                .AddJsonFile($"config.{env.EnvironmentName}.json", optional: true);
+```
+
+
 In the method ```Startup``` make sure to set Application Insights settings overrides. Specifically, set developer mode to true in development environment:
 
 ``` C#
