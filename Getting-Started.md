@@ -23,13 +23,15 @@ If you don't already have the code that parses config.json file and initializes 
 public IConfiguration Configuration { get; set; }
 ```
 
- add it to your Startup method:
+Then add the code that parses configuration if you don't have it already.
 
 ``` C#
   // Setup configuration sources.
             var configuration = new Configuration()
                 .AddJsonFile("config.json")
                 .AddJsonFile($"config.{env.EnvironmentName}.json", optional: true);
+            configuration.AddEnvironmentVariables();
+            Configuration = configuration;
 ```
 
 
