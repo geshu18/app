@@ -8,6 +8,7 @@ Add new entry in dependencies section:
 
 ##config.json
 If config.json file is not already part of your application, create it on the root level of your project.
+
 Configure instrumentation key. You need azure subscription to get instrumentation key. [This instruction](http://azure.microsoft.com/en-us/documentation/articles/app-insights-java-get-started/) explains how to get instrumentation key:
 Once you have your instrumentation key, add the following section in the root of your config.json file.
 ``` json
