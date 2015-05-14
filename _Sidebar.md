@@ -1,6 +1,7 @@
 Documentation
 - [Getting started](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Getting-Started)
 - [Configure](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Configure)
+- [Requests processing](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Requests-Processing)
 
 Development
 - [Testing](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Testing)
