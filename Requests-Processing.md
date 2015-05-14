@@ -22,8 +22,15 @@ Exception tracking middleware catches and re-throws exceptions from the next mid
 ##Typical application
 Typical application pipeline starts with error handling middleware followed by static files, identity and then middleware implementing business logic.
 
-For this pipeline you need to insert request telemetry middleware (```UseApplicationInsightsRequestTelemetry```) as a very first middleware. 
+For this pipeline you need to insert request tracking middleware (```UseApplicationInsightsRequestTelemetry```) as a very first middleware. Exception tracking middleware should be inserted right after error handling middleware such as ```ErrorPage``` middleware. 
 
+This configuration ensures that every exception thrown by identity and business logic middleware will be caught and reported by exception tracking middleware and request tracking middleware will report accurate request duration and status code.
+
+##Exceptional cases
+There are situations when telemetry reported by Application Insights may not look correct:
+
+- If application has no error handling middleware Application Insights will report response status code ```200``` when unhandled exception is thrown. Actual status code will be 500.
+- If middleware [UseStatusCodePagesWithRedirects](https://github.com/aspnet/Diagnostics/blob/b1643b438aa947370868b4d5ee7727c27f2d78cb/src/Microsoft.AspNet.Diagnostics/StatusCodePagesExtensions.cs#L76) is used - failed requests will be reported as successful with the status code ```302```.
 
 
 
