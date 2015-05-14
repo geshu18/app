@@ -42,4 +42,13 @@ You also may need to fine tune certain telemetry data:
 Not handling exceptions and rely on framework behavior is considered bad practice. You will need to implement your own middleware to properly report response status code in this case.
 
 ###Redirect to error page
-If your error processing logic redirects request (returns ```302```) to error page in case of exception 
+If your error processing logic redirects request (returns ```302```) to error page in case of exception you may want to insert Request Tracking Module after error-redirection module.
+
+###Singnal-R
+For long running requests that can affect aggregations you need to implement telemetry initializer that will reset duration of such requests to zero. See [Configure](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Configure/) section to find out how to create a telemetry initializer.
+
+###Expected exceptions
+If expected exception is handled by dedicated middleware - consider adding exception tracking middleware before this middleware so it will not see this exception.
+
+###Expected error codes
+For error codes like ```404``` you may want to report request as successful so "failed requests"
