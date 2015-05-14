@@ -29,13 +29,17 @@ This configuration ensures that every exception thrown by identity and business 
 ##Exceptional cases
 There are situations when telemetry reported by Application Insights may not look correct:
 
-- If application has no error handling middleware Application Insights will report response status code ```200``` when unhandled exception is thrown. Actual status code will be ```500```.
-- If middleware [UseStatusCodePagesWithRedirects](https://github.com/aspnet/Diagnostics/blob/b1643b438aa947370868b4d5ee7727c27f2d78cb/src/Microsoft.AspNet.Diagnostics/StatusCodePagesExtensions.cs#L76) is used - failed requests will be reported as successful with the status code ```302```.
+- *Runaway exceptions*: If application has no error handling middleware Application Insights will report response status code ```200``` when unhandled exception is thrown. Actual status code will be ```500```.
+- *Redirect to error page*: If middleware [UseStatusCodePagesWithRedirects](https://github.com/aspnet/Diagnostics/blob/b1643b438aa947370868b4d5ee7727c27f2d78cb/src/Microsoft.AspNet.Diagnostics/StatusCodePagesExtensions.cs#L76) is used - failed requests will be reported as successful with the status code ```302```.
+- *Singnal-R*: Singlar-R requests are very long running and their duration can affect aggregated request duration metrics.
 
 You also may need to fine tune certain telemetry data:
-- Do not report expected exceptions
-- Mark some of ```404``` requests as successful so failed requests count will not be too high
+- *Expected exceptions*: Do not report expected exceptions
+- *Expected error codes*: Mark some of ```404``` requests as successful so failed requests count will not be too high
+
 
 ###Runaway exceptions
+Not handling exceptions and rely on framework behavior is considered bad practice. You will need to implement your own middleware to properly report response status code in this case.
 
-
+###Redirect to error page
+If your error processing logic redirects request (returns ```302```) to error page in case of exception 
