@@ -51,4 +51,4 @@ For long running requests that can affect aggregations you need to implement tel
 If expected exception is handled by dedicated middleware - consider adding exception tracking middleware before this middleware so it will not see this exception.
 
 ###Expected error codes
-For error codes like ```404``` you may want to report request as successful so "failed requests"
+For error codes like ```404``` you may want to report request as successful so "failed requests" metric will not be affected. You need to implement telemetry initializer to reset successful flag to true for such requests. See [Configure](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Configure/) section to find out how to create a telemetry initializer.
