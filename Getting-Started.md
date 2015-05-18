@@ -4,7 +4,7 @@ For web applications created from the standard ASP.NET 5 project template in Vis
 - Add Application Insights instrumentation code to the `startup.cs`
 - Add Application Insights JavaScript instrumentation to the `_Layout.cshtml`
 
-## project.json
+## Add Application Insights NuGet package dependency to `project.json`
 Add the following entry to the `dependencies`` section. 
 ``` json
 {
@@ -14,7 +14,7 @@ Add the following entry to the `dependencies`` section.
 }
 ```
 
-## config.json
+## Add Application Insights instrumentation key to the `config.json`
 Add the instrumentation key of an existing Application Insights web application resource to the `ApplicationInsights` section of the `config.json`. 
 ``` json
 {
@@ -26,7 +26,7 @@ Add the instrumentation key of an existing Application Insights web application 
 
 If you don't have the instrumentation key, follow instructions on this [page](http://azure.microsoft.com/en-us/documentation/articles/app-insights-start-monitoring-app-health-usage) to get it.
 
-##Startup.cs
+## Add Application Insights instrumentation code to the `startup.cs`
 If you don't already have the code that parses config.json file and initializes configuration variable, create Configuration variable
 ``` C#
 public IConfiguration Configuration { get; set; }
@@ -78,7 +78,7 @@ app.UseApplicationInsightsExceptionTelemetry();
 ```
 If you don't have any error handling middleware defined, just add this method right after UseApplicationInsightsRequestTelemetry method.
 
-##_Layout.cshtml (if present)
+## Add Application Insights JavaScript instrumentation to the `_Layout.cshtml` (if present)
 Define using and injection in the very top of the file:
 
 ``` html
