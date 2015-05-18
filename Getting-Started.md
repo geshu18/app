@@ -6,6 +6,7 @@ For web applications created from the standard ASP.NET 5 project template in Vis
 
 ## Add Application Insights NuGet package dependency to `project.json`
 Add the following entry to the `dependencies`` section. 
+
 ``` json
 {
   "dependencies": {
@@ -13,6 +14,7 @@ Add the following entry to the `dependencies`` section.
   }
 }
 ```
+where "0.*" is a Nuget number, for example "0.32.0-beta4". Use the latest version number from [Release page](https://github.com/Microsoft/ApplicationInsights-aspnet5/releases). 
 
 ## Add Application Insights instrumentation key to the `config.json`
 Add the instrumentation key of an existing Application Insights web application resource to the `ApplicationInsights` section of the `config.json`. 
