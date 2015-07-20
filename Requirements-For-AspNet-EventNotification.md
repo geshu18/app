@@ -19,5 +19,4 @@ This injection may be error-prone and requires customer to understand pipeline q
 ##Exception tracking
 - Receive exception object from ErrorHandling middleware
 - Receive exception object when exception was unhandled by ANY middleware
-
 - Associate exception with the current request object
