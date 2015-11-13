@@ -1,4 +1,4 @@
-For web applications created from the standard ASP.NET 5 project template in Visual Studio 2015, you don't need to make any changes if you selected "Add Application Insights" during project creation. Otherwise, the following changes need to be made
+For web applications created from the standard ASP.NET 5 project template in Visual Studio 2015 (with latest [Web Tools](http://go.microsoft.com/fwlink/?LinkId=690242)), you don't need to make any changes if you selected "Add Application Insights" during project creation. Otherwise, the following changes need to be made
 - Add Application Insights NuGet package dependency to `project.json`
 - Add Application Insights instrumentation key to the `appsettings.json`
 - Add Application Insights instrumentation code to the `startup.cs`
