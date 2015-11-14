@@ -2,7 +2,7 @@
 
 If you're creating a new project (in Visual Studio 2015 with the latest [web tools](http://go.microsoft.com/fwlink/?LinkId=690242)), just select **Add Application Insights** in the new project dialog. Then [run your app and view your telemetry](#run-your-app-and-view-your-telemetry).
 
-Otherwise, make the following changes (follow the details below):
+Otherwise, follow the details in this article to make the following changes:
 - Create an Application Insights resource
 - Add Application Insights NuGet package dependency to `project.json`
 - Add Application Insights instrumentation key to the `appsettings.json`
