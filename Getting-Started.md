@@ -13,7 +13,7 @@ Otherwise, follow the details in this article to make the following changes:
 ## Create an Application Insights resource
 
 1. Sign in to the [Microsoft Azure portal](https://portal.azure.com). (Need to [sign up](https://azure.microsoft.com/pricing/free-trial/)?)
-2. Create a new Application Insights resource. (**New**, **Developer Services**, **Application Insights**). Select the ASP.NET application type.
+2. Create a new Application Insights resource. (Click **New**, **Developer Services**, **Application Insights**). Select the ASP.NET application type.
 3. In your new resource, open the **Essentials** drop-down and copy the Instrumentation Key - you'll need it in the next step. 
 
 ## Add Application Insights NuGet package dependency to `project.json`
