@@ -3,6 +3,7 @@
 If you're creating a new project (in Visual Studio 2015 with the latest [web tools](http://go.microsoft.com/fwlink/?LinkId=690242)), just select **Add Application Insights** in the new project dialog. Then [run your app and view your telemetry](#run-your-app-and-view-your-telemetry).
 
 Otherwise, make the following changes (follow the details below):
+- Create an Application Insights resource
 - Add Application Insights NuGet package dependency to `project.json`
 - Add Application Insights instrumentation key to the `appsettings.json`
 - Add Application Insights instrumentation code to the `startup.cs`
@@ -28,7 +29,7 @@ Add the following entry to the `dependencies`` section.
 where "0.*" is a Nuget number, for example "1.0.0-beta8". Use the latest version number from [Release page](https://github.com/Microsoft/ApplicationInsights-aspnet5/releases). 
 
 ## Add Application Insights instrumentation key to the `appsettings.json`
-Add the instrumentation key of an existing Application Insights web application resource to the `ApplicationInsights` section of the `appsettings.json`. 
+Add the instrumentation key of your Application Insights web application resource to the `ApplicationInsights` section of the `appsettings.json`. 
 ``` json
 {
   "ApplicationInsights": {
@@ -36,8 +37,6 @@ Add the instrumentation key of an existing Application Insights web application 
   }
 }
 ```
-
-If you don't have the instrumentation key, follow instructions on this [page](http://azure.microsoft.com/en-us/documentation/articles/app-insights-start-monitoring-app-health-usage) to get it.
 
 ## Add Application Insights instrumentation code to the `startup.cs`
 If you don't already have the code that parses appsettings.json file and initializes configuration variable, create Configuration variable
