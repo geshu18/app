@@ -1,4 +1,8 @@
-For web applications created from the standard ASP.NET 5 project template in Visual Studio 2015 (with latest [Web Tools](http://go.microsoft.com/fwlink/?LinkId=690242)), you don't need to make any changes if you selected "Add Application Insights" during project creation. Otherwise, the following changes need to be made
+[Application Insights](https://azure.microsoft.com/documentation/articles/app-insights-overview/) is an extensible analytics platform that monitors the performance and usage of your live ASP.NET 5 web app.
+
+If you're creating a new project (in Visual Studio 2015 with the latest [web tools](http://go.microsoft.com/fwlink/?LinkId=690242)), just select **Add Application Insights** in the new project dialog. 
+
+Otherwise, make the following changes (follow the details below):
 - Add Application Insights NuGet package dependency to `project.json`
 - Add Application Insights instrumentation key to the `appsettings.json`
 - Add Application Insights instrumentation code to the `startup.cs`
@@ -94,3 +98,16 @@ In `_Layout.cshtml`, insert HtmlHelper to the end of ```<head>``` section but be
 	@Html.ApplicationInsightsJavaScript(TelemetryConfiguration) 
 </head>
 ```
+
+## Run your app and view your telemetry
+
+* Use [Search Explorer](https://azure.microsoft.com/documentation/articles/app-insights-diagnostic-search/) to investigate individual requests, exceptions, log traces and other events.
+* Use [Metrics Explorer](https://azure.microsoft.com/documentation/articles/app-insights-metrics-explorer/) to slice and dice metrics and counts such as response times, page views and user counts.
+* [Set alerts](https://azure.microsoft.com/documentation/articles/app-insights-alerts/) to notify you when your app goes off-limits.
+
+## Get more telemetry
+
+* [Monitor dependencies](https://azure.microsoft.com/documentation/articles/app-insights-dependencies/) to see if REST, SQL or other external resources are slowing you down.
+* [Use the API](https://azure.microsoft.com/documentation/articles/app-insights-api-custom-events-metrics/) to send your own events and metrics for a more detailed view of your app's performance and usage.
+* [Availability tests](https://azure.microsoft.com/documentation/articles/app-insights-monitor-web-app-availability/) check your app constantly from around the world. 
+
