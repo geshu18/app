@@ -1,8 +1,6 @@
 [Application Insights](https://azure.microsoft.com/documentation/articles/app-insights-overview/) is an extensible analytics platform that monitors the performance and usage of your live ASP.NET 5 web app.
 
-If you're creating a new project (in Visual Studio 2015 with the latest [web tools](http://go.microsoft.com/fwlink/?LinkId=690242)), just select **Add Application Insights** in the new project dialog. Then [run your app and view your telemetry](#run-your-app-and-view-your-telemetry).
-
-Otherwise, follow the details in this article to make the following changes:
+Follow the details in this article to make the following changes:
 - Create an Application Insights resource
 - Add Application Insights NuGet package dependency to `project.json`
 - Add Application Insights instrumentation key to the `appsettings.json`
@@ -22,7 +20,7 @@ Add the following entry to the `dependencies`` section.
 ``` json
 {
   "dependencies": {
-    "Microsoft.ApplicationInsights.AspNet": "1.0.0-beta8"
+    "Microsoft.ApplicationInsights.AspNet": "1.0.0-rc1"
   }
 }
 ```
@@ -50,8 +48,8 @@ public IConfigurationRoot Configuration { get; set; }
 
 Then add the following dependency entries to your project.json if they are not defined there already.
 ``` json
-    "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta8",
-    "Microsoft.Framework.Configuration.Json":  "1.0.0-beta8"
+    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.Json":  "1.0.0-rc1-final"
 ```
 
 (Verify the version number.)
