@@ -2,7 +2,7 @@
 
 ## Telemetry Modules and Default Tracking
 
-Application Insights references ```DependencyTrackingTelemetryModule``` and ```PerformanceCollectorModule``` from [ApplicationInsights-aspnetcore](https://github.com/Microsoft/ApplicationInsights-server-dotnet/releases/tag/InitialCommit), which are responsible for enabling default dependency tracking and performance counter collection. Both the telemetry modules are added along with telemetry initializers, when Application Insights is added to services in the method ```ConfigureServices``` ([Getting Started](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Getting-Started)). 
+Application Insights references ```DependencyTrackingTelemetryModule``` and ```PerformanceCollectorModule``` from [ApplicationInsights-server-dotnet](https://github.com/Microsoft/ApplicationInsights-server-dotnet/releases/tag/InitialCommit), which are responsible for enabling default dependency tracking and performance counter collection. Both the telemetry modules are added along with telemetry initializers, when Application Insights is added to services in the method ```ConfigureServices``` ([Getting Started](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Getting-Started)). 
 
 ``` c#
 services.AddApplicationInsightsTelemetry(Configuration);
