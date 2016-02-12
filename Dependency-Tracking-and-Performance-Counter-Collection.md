@@ -8,18 +8,18 @@ Application Insights references ```DependencyTrackingTelemetryModule``` and ```P
 services.AddApplicationInsightsTelemetry(Configuration);
 ```
 
-## Disabling Services
+## Disabling Telemetry Module Services
 
 In order to disable the services, you need to manually remove the modules from the existing list of services in the method ```ConfigureServices```. Please note that telemetry modules should be removed only after adding Application Insights to the services.
 
 ``` c#
 // Removing dependency tracking telemetry module - to disable default dependency tracking
 var dependencyTrackingService = services.FirstOrDefault<ServiceDescriptor>(t => t.ImplementationType == typeof(DependencyTrackingTelemetryModule));
-services.Remove(dependencyTrackingService );
+services.Remove(dependencyTrackingService);
 
 // Removing performance collector module - to disable default performance counter collection
 var performanceCounterService = services.FirstOrDefault<ServiceDescriptor>(t => t.ImplementationType == typeof(PerformanceCollectorModule));
-services.Remove(performanceCounterService );
+services.Remove(performanceCounterService);
 ```
 
 
