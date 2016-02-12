@@ -15,11 +15,16 @@ In order to disable the services, you need to manually remove the modules from t
 ``` c#
 // Removing dependency tracking telemetry module - to disable default dependency tracking
 var dependencyTrackingService = services.FirstOrDefault<ServiceDescriptor>(t => t.ImplementationType == typeof(DependencyTrackingTelemetryModule));
-services.Remove(dependencyTrackingService);
+if (dependencyTrackingService!= null)
+{
+ services.Remove(dependencyTrackingService);
+}
 
 // Removing performance collector module - to disable default performance counter collection
 var performanceCounterService = services.FirstOrDefault<ServiceDescriptor>(t => t.ImplementationType == typeof(PerformanceCollectorModule));
-services.Remove(performanceCounterService);
+if (performanceCounterService != null)
+{
+ services.Remove(performanceCounterService);
+}
 ```
-
 
