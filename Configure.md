@@ -114,7 +114,8 @@ Secondly, register your telemetry initializer into global collection:
 public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
 {
     var initializer = new PropertyTelemetryInitializer(app.ApplicationServices.GetService<IHttpContextAccessor>());
-    TelemetryConfiguration.Active.TelemetryInitializers.Add(initializer);
+    var configuration= app.ApplicationServices.GetService<TelemetryConfiguration>();
+    configuration.TelemetryInitializers.Add(initializer);
 ``` 
 
 Remove default telemetry initializers
@@ -123,9 +124,8 @@ You need to get TelemetryClient instance to make sure that global telemetry conf
 ```
 public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
 {
-    var telemetryClient = app.ApplicationServices.GetService<TelemetryClient>();
-    TelemetryConfiguration.Active.TelemetryInitializers.Clear();
-
+    var configuration= app.ApplicationServices.GetService<TelemetryConfiguration>();
+    configuration.TelemetryInitializers.Clear();
 ```
 
 Redirect traffic to the different endpoint
