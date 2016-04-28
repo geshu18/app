@@ -8,11 +8,13 @@ Telemetry processors, are configured as a part of telemetry configuration. From 
 
 From (>= 1.0.0-RC1-Update4), telemetry configuration can be accessed either using ```Active```
 
-```var telemetryConfiguration = TelemetryConfiguration.Active``` 
+``` c#
+var telemetryConfiguration = TelemetryConfiguration.Active``` 
 
 or by getting it from services 
 
-```var telemetryConfiguration = services.GetRequiredService<TelemetryConfiguration>();```
+``` c#
+var telemetryConfiguration = services.GetRequiredService<TelemetryConfiguration>();```
 
 ## Using Custom Telemetry Processor
 
