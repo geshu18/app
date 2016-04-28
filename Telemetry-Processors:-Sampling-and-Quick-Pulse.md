@@ -19,6 +19,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 {
     var configuration= app.ApplicationServices.GetService<TelemetryConfiguration>();
     configuration.TelemetryInitializers.Clear();
+```
 
 ## Using Custom Telemetry Processor
 
