@@ -63,7 +63,9 @@ builder.Build();
 
 The function call 
 
-```services.AddApplicationInsightsTelemetry(Configuration)``` 
+``` c#
+services.AddApplicationInsightsTelemetry(Configuration);
+``` 
 
 should be replaced by
 
