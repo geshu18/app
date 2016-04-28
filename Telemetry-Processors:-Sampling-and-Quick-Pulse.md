@@ -12,11 +12,13 @@ From (>= 1.0.0-RC1-Update4), telemetry configuration can be accessed either usin
 var telemetryConfiguration = TelemetryConfiguration.Active
 ``` 
 
-or by getting it from services 
+or by getting it through application builder services
 
 ``` c#
-var telemetryConfiguration = services.GetRequiredService<TelemetryConfiguration>();
-```
+public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
+{
+    var configuration= app.ApplicationServices.GetService<TelemetryConfiguration>();
+    configuration.TelemetryInitializers.Clear();
 
 ## Using Custom Telemetry Processor
 
