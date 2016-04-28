@@ -33,7 +33,7 @@ Track custom trace/event/metric
 Please refer to [Applicaiton Insights custom metrics API reference](http://azure.microsoft.com/en-us/documentation/articles/app-insights-custom-events-metrics-api/) for description of custom data reporting in Application Insights.
 
 Get TelemetryClient using dependency injection: 
-```
+``` c#
 public class HomeController : Controller
 {
     private TelemetryClient telemetry;
@@ -69,7 +69,7 @@ Add additional telemetry item properties
 Add properties for request data item
 ------------------------------------
 If you want to add additional properties for request telemetry you need to get an instance of ```RequestTelemetry``` via dependency injection:
-```
+``` c#
 public class HomeController : Controller
 {
     private RequestTelemetry requestTelemetry;
@@ -93,7 +93,7 @@ Add request-level properties for all telemetry items
 In order to set request level context properties for all telemetry items you need to configure your telemetry initializer.
 
 First, define new class with IHttpContextAccessor dependency. This class will get property from the current http context and set corresponding property on telemetry data item:
-```
+``` c#
 public class PropertyTelemetryInitializer : ITelemetryInitializer
 {
     IHttpContextAccessor httpContextAccessor;
@@ -121,7 +121,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 Remove default telemetry initializers
 =====================================
 You need to get TelemetryClient instance to make sure that global telemetry configuration got initialized. After that you can modify the list of default telemetry initializers: 
-```
+``` c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
 {
     var configuration= app.ApplicationServices.GetService<TelemetryConfiguration>();
