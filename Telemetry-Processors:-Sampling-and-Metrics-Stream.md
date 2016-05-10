@@ -67,7 +67,7 @@ builder.Build();
 
 ## Metrics Stream
 
-[Metrics Stream](https://azure.microsoft.com/en-us/documentation/articles/app-insights-sampling) captures the live metrics and provides the current working scenario of the application. Metrics Stream feature is not enabled by default in ASP.NET Core applications. In order to enable the feature, ```QuickPulseTelemetryProcessor```, as well as ```QuickPulseTelemetryModule``` should be registered with the telemetry configuration. 
+[Metrics Stream](: https://azure.microsoft.com/en-us/blog/live-metrics-stream/) captures the live metrics and provides the current working scenario of the application. Metrics Stream feature is not enabled by default in ASP.NET Core applications. In order to enable the feature, ```QuickPulseTelemetryProcessor```, as well as ```QuickPulseTelemetryModule``` should be registered with the telemetry configuration. 
 
 It is best advised to have ```QuickPulseTelemetryProcessor``` as the first telemetry processor, which can ensure that all the telemetry (before filtered/sampled) is gone through live metrics. So, the default adaptive sampling has to be disabled first, register the Metrics Stream module and processor and then add adaptive sampling telemetry processor back to the configuration, as described below:
 
