@@ -1,4 +1,4 @@
-[Application Insights](https://azure.microsoft.com/documentation/articles/app-insights-overview/) is an extensible analytics platform that monitors the performance and usage of your live ASP.NET 5 web app.
+[Application Insights](https://azure.microsoft.com/documentation/articles/app-insights-overview/) is an extensible analytics platform that monitors the performance and usage of your live ASP.NET Core web applications.
 
 Follow the details in this article to make the following changes:
 - Create an Application Insights resource
@@ -11,7 +11,7 @@ Follow the details in this article to make the following changes:
 ## Create an Application Insights resource
 
 1. Sign in to the [Microsoft Azure portal](https://portal.azure.com). (Need to [sign up](https://azure.microsoft.com/pricing/free-trial/)?)
-2. Create a new Application Insights resource. (Click **New**, **Developer Services**, **Application Insights**). Select the ASP.NET application type.
+2. Create a new Application Insights resource. (Click **New**, **Developer Services**, **Application Insights**). Select the ASP.NET Core application type.
 3. In your new resource, open the **Essentials** drop-down so that you can copy the Instrumentation Key - you'll need it shortly. 
 
 ## Add Application Insights NuGet package dependency to `project.json`
@@ -20,11 +20,11 @@ Add the following entry to the `dependencies`` section.
 ``` json
 {
   "dependencies": {
-    "Microsoft.ApplicationInsights.AspNet": "1.0.0-rc1"
+    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0-rc2-final"
   }
 }
 ```
-Verify the version number: get the latest from the [Release page](https://github.com/Microsoft/ApplicationInsights-aspnet5/releases). 
+Verify the version number: get the latest from the [Release page](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases). 
 
 ## Add the instrumentation key to the `appsettings.json`
 
@@ -48,8 +48,8 @@ public IConfigurationRoot Configuration { get; set; }
 
 Then add the following dependency entries to your project.json if they are not defined there already.
 ``` json
-    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.Json":  "1.0.0-rc1-final"
+    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.Json":  "1.0.0-rc2-final"
 ```
 
 (Verify the version number.)
@@ -75,7 +75,7 @@ if (env.IsDevelopment())
 }
 ```
 
-In the method ```ConfigureServices``` add Application Insights service. You'll need to add namespace ```Microsoft.ApplicationInsights.AspNet``` in the using list:
+In the method ```ConfigureServices``` add Application Insights service. You'll need to add namespace ```Microsoft.ApplicationInsights.AspNetCore``` in the using list:
 ``` c#
 services.AddApplicationInsightsTelemetry(Configuration);
 ```
