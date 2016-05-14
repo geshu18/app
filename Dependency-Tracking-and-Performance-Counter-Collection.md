@@ -1,4 +1,4 @@
-[Dependency tracking](https://azure.microsoft.com/documentation/articles/app-insights-dependencies/) and [performance counter collection](https://azure.microsoft.com/documentation/articles/app-insights-web-monitor-performance/) are by default enabled in full framework (currently not supported in .NET Core), when Application Insights (>= [1.0.0-RC1-Update2](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases/tag/v1.0.0-rc1-update2)) is installed to monitor your live ASP.NET 5 web app.
+[Dependency tracking](https://azure.microsoft.com/documentation/articles/app-insights-dependencies/) and [performance counter collection](https://azure.microsoft.com/documentation/articles/app-insights-web-monitor-performance/) are by default enabled in full framework (currently not supported in .NET Core), when Application Insights (>= [1.0.0-RC1-Update2](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases/tag/v1.0.0-rc1-update2)) is installed to monitor your live ASP.NET Core web app.
 
 ## Telemetry Modules and Default Tracking
 
