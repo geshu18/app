@@ -26,6 +26,17 @@ Add the following entry to the `dependencies`` section.
 ```
 Verify the version number: get the latest from the [Release page](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases). 
 
+In case of **.NET Core** applications, if you run into restore errors with respect to application insights dependency, please add ```"dnxcore50"``` and ```"portable-net45+win8" ``` to the imports list (if it does not exist), under ```frameoworks``` section of ```project.json```, as described below. Please visit [Migrating from DNX](http://dotnet.github.io/docs/core-concepts/dnx-migration.html) for more details.
+``` json
+{
+    "frameworks": {
+        "netcoreapp1.0": { 
+            "imports": ["dnxcore50", "portable-net45+win8"]
+        }
+    }
+}
+```
+
 ## Add the instrumentation key to the `appsettings.json`
 
 Add the instrumentation key of your Application Insights web application resource to the `ApplicationInsights` section of the `appsettings.json`. 
@@ -54,14 +65,14 @@ Then add the following dependency entries to your project.json if they are not d
 
 (Verify the version number.)
 
-Then add the code that parses configuration if you don't have it already.
+Then add the code that parses configuration if you don't have it already in the method ```Startup```.
 
 ``` C#
   // Setup configuration sources.
             var builder = new ConfigurationBuilder()
-                .SetBasePath(appEnv.ApplicationBasePath)
+                .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json")
-                .AddEnvironmentVariables();
+
             Configuration = builder.Build();
 ```
 
