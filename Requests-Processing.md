@@ -1,5 +1,5 @@
 #Request processing and telemetry
-Application Insights SDK for ASP.NET 5 applications allows to track requests and exception information. For every request it collects:
+Application Insights SDK for ASP.NET Core web applications allows to track requests and exception information. For every request it collects:
 
 - request name, 
 - url, 
