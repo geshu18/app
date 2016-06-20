@@ -67,7 +67,9 @@ builder.Build();
 
 ## Metrics Stream
 
-[Metrics Stream](: https://azure.microsoft.com/en-us/blog/live-metrics-stream/) captures the live metrics and provides the current working scenario of the application. Metrics Stream feature is not enabled by default in ASP.NET Core applications. In order to enable the feature, ```QuickPulseTelemetryProcessor```, as well as ```QuickPulseTelemetryModule``` should be registered with the telemetry configuration. 
+[Metrics Stream](: https://azure.microsoft.com/en-us/blog/live-metrics-stream/) captures the live metrics and provides the current working scenario of the application.
+
+> Note: Currently, metrics stream uses telemetry processors, which are enabled only in full framework. Therefore, core framework as of today, does not support metrics stream collection.
 
 Metrics Stream is enabled by default in full framework, when Application Insights (>= [1.0.0-rc2-final](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases/tag/v1.0.0-rc2-final)) is installed to monitor your live ASP.NET Core web applications. The default metrics collection can be disabled when we add Application Insights service, in the method ```ConfigureServices```, using ```ApplicationInsightsServiceOptions```:
 
