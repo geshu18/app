@@ -20,7 +20,7 @@ Add the following entry to the `dependencies`` section.
 ``` json
 {
   "dependencies": {
-    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0-rc2-final"
+    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0"
   }
 }
 ```
@@ -59,8 +59,8 @@ public IConfigurationRoot Configuration { get; set; }
 
 Then add the following dependency entries to your project.json if they are not defined there already.
 ``` json
-    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc2-final",
-    "Microsoft.Extensions.Configuration.Json":  "1.0.0-rc2-final"
+    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0",
+    "Microsoft.Extensions.Configuration.Json":  "1.0.0"
 ```
 
 (Verify the version number.)
