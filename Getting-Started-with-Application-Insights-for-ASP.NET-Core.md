@@ -129,6 +129,7 @@ In `_Layout.cshtml`, insert HtmlHelper to the end of ```<head>``` section but be
 
 * Use [Search Explorer](https://azure.microsoft.com/documentation/articles/app-insights-diagnostic-search/) to investigate individual requests, exceptions, log traces and other events.
 * Use [Metrics Explorer](https://azure.microsoft.com/documentation/articles/app-insights-metrics-explorer/) to slice and dice metrics and counts such as response times, page views and user counts.
+* [Analytics](https://azure.microsoft.com/documentation/articles/app-insights-analytics/) is a powerful query language that you can use to extract performance and usage data from your telemetry.
 * [Set alerts](https://azure.microsoft.com/documentation/articles/app-insights-alerts/) to notify you when your app goes off-limits.
 
 ## Get more telemetry
