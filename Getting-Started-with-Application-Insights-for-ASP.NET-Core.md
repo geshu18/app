@@ -8,7 +8,7 @@ Follow the details in this article to add Application Insights to your app. You'
 - Add Application Insights instrumentation code to the `startup.cs`
 - Add Application Insights JavaScript instrumentation to the `_ViewImports.cshtml`, `_Layout.cshtml`
 
-If you prefer, you can use Visual Studio to perform the first three steps, but you still need to [make some additions manually](#manual).
+If you prefer, you can use Visual Studio to perform the first three steps by using the "Add Application Insights" menu command on your web project. But you still need to [make some additions manually](#manual).
 
 ## Create an Application Insights resource
 
