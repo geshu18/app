@@ -1,17 +1,21 @@
-[Application Insights](https://azure.microsoft.com/documentation/articles/app-insights-overview/) is an extensible analytics platform that monitors the performance and usage of your live ASP.NET Core web applications.
+Monitor your live ASP.NET Core applications with [Visual Studio Application Insights](https://azure.microsoft.com/documentation/articles/app-insights-overview/). Application Insights is an extensible analytics platform that monitors the performance and usage of your live web applications. With the feedback you get about the performance and effectiveness of your app in the wild, you can make informed choices about the direction of the design in each development lifecycle.
 
-Follow the details in this article to make the following changes:
+Follow the details in this article to add Application Insights to your app. You'll make the following changes:
+
 - Create an Application Insights resource
 - Add Application Insights NuGet package dependency to `project.json`
 - Add Application Insights instrumentation key to the `appsettings.json`
 - Add Application Insights instrumentation code to the `startup.cs`
 - Add Application Insights JavaScript instrumentation to the `_ViewImports.cshtml`, `_Layout.cshtml`
 
+If you prefer, you can use Visual Studio to perform the first three steps, but you still need to [make some additions manually](#manual).
 
 ## Create an Application Insights resource
 
 1. Sign in to the [Microsoft Azure portal](https://portal.azure.com). (Need to [sign up](https://azure.microsoft.com/pricing/free-trial/)?)
-2. Create a new Application Insights resource. (Click **New**, **Developer Services**, **Application Insights**). Select the ASP.NET Core application type.
+2. Create a new Application Insights resource. (Click **New**, **Developer Services**, **Application Insights**). Select the **ASP.NET web application** type.
+
+    ![Create a resource](https://acom.azurecomcdn.net/80C57D/cdn/mediahandler/docarticles/dpsmedia-prod/azure.microsoft.com/en-us/documentation/articles/app-insights-create-new-resource/20160826050250/01-new.png)
 3. In your new resource, open the **Essentials** drop-down so that you can copy the Instrumentation Key - you'll need it shortly. 
 
 ## Add Application Insights NuGet package dependency to `project.json`
@@ -24,6 +28,7 @@ Add the following entry to the `dependencies`` section.
   }
 }
 ```
+
 Verify the version number: get the latest from the [Release page](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases). 
 
 In case of **.NET Core** applications, if you run into restore errors with respect to application insights dependency, please add ```"dnxcore50"``` and ```"portable-net45+win8" ``` to the imports list (if it does not exist), under ```frameoworks``` section of ```project.json```, as described below. Please visit [Migrating from DNX](http://dotnet.github.io/docs/core-concepts/dnx-migration.html) for more details.
@@ -48,7 +53,7 @@ Add the instrumentation key of your Application Insights web application resourc
   }
 }
 ```
-
+<a name="manual"></a>
 ## Add Application Insights instrumentation code to `startup.cs`
 
 If you don't already have the code that parses appsettings.json file and initializes configuration variable, create Configuration variable:
