@@ -28,7 +28,7 @@ Add the following entry to the  `dependencies` section.
 
 Verify the version number: get the latest from the [Release page](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases). 
 
-In the case of **.NET Core** applications, if you run into restore errors with respect to Application Insights dependency, please add  "dnxcore50"  and  "portable-net45+win8"  to the imports list (if it does not exist), under  frameworks  section of  `project.json`, as shown below. Please see [Migrating from DNX](http://dotnet.github.io/docs/core-concepts/dnx-migration.html) for more details.
+In the case of **.NET Core** applications, if you run into restore errors with respect to Application Insights dependency, please add  "dnxcore50"  and  "portable-net45+win8"  to the imports list (if it does not exist), under  frameworks  section of  `project.json`, as shown below. Please see [Migrating from DNX](https://docs.microsoft.com/en-us/dotnet/articles/core/migrating-from-dnx) for more details.
 
 ```JSON
 {
