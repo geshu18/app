@@ -98,24 +98,6 @@ In the method `ConfigureServices` add the Application Insights service. You'll n
 services.AddApplicationInsightsTelemetry(Configuration);
 ```
 
-In the method `Configure` add Application Insights request and exception tracking middleware. Please note that request tracking middleware should be added as the very first middleware in pipeline:
-
-```C#
-
-// Add Application Insights monitoring to the request pipeline as a very first middleware.
-app.UseApplicationInsightsRequestTelemetry();
-```
-
-Exception middleware should be added after error page and any other error handling middleware:
-
-```C#
-
-// Add Application Insights exceptions handling to the request pipeline.
-app.UseApplicationInsightsExceptionTelemetry();
-```
-
-If you don't have any error handling middleware defined, just add this method right after `UseApplicationInsightsRequestTelemetry` method.
-
 ## Add Application Insights JavaScript instrumentation to the  _ViewImports.cshtml ,  _Layout.cshtml  
 
 (if present)
