@@ -21,7 +21,7 @@ Add the following entry to the  `dependencies` section.
 ```JSON
 {
   "dependencies": {
-    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0"
+    "Microsoft.ApplicationInsights.AspNetCore": "2.0.0"
   }
 }
 ```
