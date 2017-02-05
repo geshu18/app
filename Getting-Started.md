@@ -105,15 +105,13 @@ services.AddApplicationInsightsTelemetry(Configuration);
 In `_ViewImports.cshtml`, add injection:
 
 ```
-
-@inject Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration TelemetryConfiguration 
+@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
 ```
 
 In `_Layout.cshtml`, insert HtmlHelper to the end of `<head>` section but before any other script. Any custom JavaScript telemetry you want to report from the page should be injected after this snippet:
 
 ```
-
-    @Html.ApplicationInsightsJavaScript(TelemetryConfiguration) 
+    @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 ```
 
