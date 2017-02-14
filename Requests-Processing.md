@@ -31,7 +31,7 @@ There are situations when telemetry reported by Application Insights may not loo
 
 - *Runaway exceptions*: If application has no error handling middleware Application Insights will report response status code ```200``` when unhandled exception is thrown. Actual status code will be ```500```.
 - *Redirect to error page*: If middleware [UseStatusCodePagesWithRedirects](https://github.com/aspnet/Diagnostics/blob/b1643b438aa947370868b4d5ee7727c27f2d78cb/src/Microsoft.AspNet.Diagnostics/StatusCodePagesExtensions.cs#L76) is used - failed requests will be reported as successful with the status code ```302```.
-- *Singnal-R*: Singlar-R requests are very long running and their duration can affect aggregated request duration metrics.
+- *SignalR*: SignalR requests are very long running and their duration can affect aggregated request duration metrics.
 
 You also may need to fine tune certain telemetry data:
 - *Expected exceptions*: Do not report expected exceptions
@@ -44,7 +44,7 @@ Not handling exceptions and rely on framework behavior is considered bad practic
 ###Redirect to error page
 If your error processing logic redirects request (returns ```302```) to error page in case of exception you may want to insert Request Tracking Module after error-redirection module.
 
-###Singnal-R
+###SignalR
 For long running requests that can affect aggregations you need to implement telemetry initializer that will reset duration of such requests to zero. See [Configure](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Configure/) section to find out how to create a telemetry initializer.
 
 ###Expected exceptions
