@@ -26,13 +26,20 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 Custom telemetry processors can be created to enable the process of filtering the telemetry, as described in [Create Custom Telemetry Processor](https://azure.microsoft.com/en-us/documentation/articles/app-insights-api-filtering-sampling/#filtering-itelemetryprocessor). Custom telemetry processors can be made available to configuration through ```TelemetryProcessorChainBuilder``` as described below:
 
 ``` c#
-var builder = telemetryConfiguration.TelemetryProcessorChainBuilder;
-builder.Use((next) => new CustomTelemetryProcessor(next));
+public void ConfigureServices(IServiceCollection services)
+{
+    // ...
+    var telemetryConfiguration =
+        services.BuildServiceProvider().GetService<TelemetryConfiguration>();
+    var builder = telemetryConfiguration.TelemetryProcessorChainBuilder;
+    builder.Use((next) => new CustomTelemetryProcessor(next));
 
-// If you have more processors:
-builder.Use((next) => new AnotherCustomTelemetryProcessor(next));
+    // If you have more processors:
+    builder.Use((next) => new AnotherCustomTelemetryProcessor(next));
 
-builder.Build();
+    builder.Build();
+    // ...
+}
 ```
 
 ## Sampling
