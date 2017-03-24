@@ -1,6 +1,6 @@
 [Application Insights](https://docs.microsoft.com/azure/application-insights/app-insights-asp-net) is an extensible analytics platform that monitors the performance and usage of your live ASP.NET Core web applications.
 
-> Visual Studio 2017 automatically configures ASP.NET Core web projects. Before following these manual steps, right-click your project in Solution Explorer and look for **Configure Application Insights** or **Add > Application Insights**. [Learn more](https://docs.microsoft.com/azure/application-insights/app-insights-asp-net).
+> **Visual Studio 2017 automatically configures ASP.NET Core web projects.** You probably don't need to follow these manual steps. Instead, right-click your project in Solution Explorer and look for **Configure Application Insights** or **Add > Application Insights**. [Learn more](https://docs.microsoft.com/azure/application-insights/app-insights-asp-net).
 
 Follow the details in this article to make the following changes:
 
