@@ -1,4 +1,4 @@
-#Request processing and telemetry
+# Request processing and telemetry
 Application Insights SDK for ASP.NET Core web applications allows to track requests and exception information. For every request it collects:
 
 - request name, 
@@ -11,22 +11,22 @@ Application Insights SDK for ASP.NET Core web applications allows to track reque
 
 This article explains how this data collection works and how to configure it for different scenarios.
 
-##Request tracking middleware
+## Request tracking middleware
 Request telemetry middleware measures request duration and then reads request properties like name and status code and sends ```RequestTelemetry``` item to backend.
 
 By default request will be marked as failed if response status code is 400+. However if unhandled exception passes this middleware - request will be marked as failed independently from status code. Typically unhandled exception in request telemetry middleware indicates that error handling middleware wasn't configured for the application.
 
-##Exception tracking middleware
+## Exception tracking middleware
 Exception tracking middleware catches and re-throws exceptions from the next middleware down the request processing pipeline. 
 
-##Typical application
+## Typical application
 Typical application pipeline starts with error handling middleware followed by static files, identity and then middleware implementing business logic.
 
 For this pipeline you need to insert request tracking middleware (```UseApplicationInsightsRequestTelemetry```) as a very first middleware. Exception tracking middleware should be inserted right after error handling middleware such as ```ErrorPage``` middleware. 
 
 This configuration ensures that every exception thrown by identity and business logic middleware will be caught and reported by exception tracking middleware and request tracking middleware will report accurate request duration and status code.
 
-##Exceptional cases
+## Exceptional cases
 There are situations when telemetry reported by Application Insights may not look correct:
 
 - *Runaway exceptions*: If application has no error handling middleware Application Insights will report response status code ```200``` when unhandled exception is thrown. Actual status code will be ```500```.
@@ -38,17 +38,17 @@ You also may need to fine tune certain telemetry data:
 - *Expected error codes*: Mark some of ```404``` requests as successful so failed requests count will not be too high
 
 
-###Runaway exceptions
+### Runaway exceptions
 Not handling exceptions and rely on framework behavior is considered bad practice. You will need to implement your own middleware to properly report response status code in this case.
 
-###Redirect to error page
+### Redirect to error page
 If your error processing logic redirects request (returns ```302```) to error page in case of exception you may want to insert Request Tracking Module after error-redirection module.
 
-###SignalR
+### SignalR
 For long running requests that can affect aggregations you need to implement telemetry initializer that will reset duration of such requests to zero. See [Configure](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Configure/) section to find out how to create a telemetry initializer.
 
-###Expected exceptions
+### Expected exceptions
 If expected exception is handled by dedicated middleware - consider adding exception tracking middleware before this middleware so it will not see this exception.
 
-###Expected error codes
+### Expected error codes
 For error codes like ```404``` you may want to report request as successful so "failed requests" metric will not be affected. You need to implement telemetry initializer to reset successful flag to true for such requests. See [Configure](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Configure/) section to find out how to create a telemetry initializer.
