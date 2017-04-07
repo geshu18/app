@@ -74,7 +74,7 @@ builder.Build();
 
 ## Metrics Stream
 
-[Metrics Stream](: https://azure.microsoft.com/en-us/blog/live-metrics-stream/) captures the live metrics and provides the current working scenario of the application.
+[Metrics Stream](https://azure.microsoft.com/en-us/blog/live-metrics-stream/) captures the live metrics and provides the current working scenario of the application.
 
 > Note: Currently, metrics stream uses telemetry processors, which are enabled only in full framework. Therefore, core framework as of today, does not support metrics stream collection.
 
