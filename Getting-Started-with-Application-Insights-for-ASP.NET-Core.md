@@ -98,6 +98,8 @@ services.AddApplicationInsightsTelemetry(Configuration);
 
 In the method ```Configure``` add Application Insights request and exception tracking middleware. Please note that request tracking middleware should be added as the very first middleware in pipeline:
 
+**Note: If you're using version 2.0 you will not include ```app.UseApplicationInsightsRequestTelemetry();``` and ```app.UseApplicationInsightsExceptionTelemetry();```, since they are managed internally.**
+
 ``` c#
 // Add Application Insights monitoring to the request pipeline as a very first middleware.
 app.UseApplicationInsightsRequestTelemetry();
@@ -124,6 +126,21 @@ In `_Layout.cshtml`, insert HtmlHelper to the end of ```<head>``` section but be
 	@Html.ApplicationInsightsJavaScript(TelemetryConfiguration) 
 </head>
 ```
+**For Version 2.0**
+
+Do not include the lines mentioned above, those are for version 1 only.
+
+In `_ViewImports.cshtml`, add injection:
+``` html
+@using Microsoft.ApplicationInsights.AspNetCore
+@inject JavaScriptSnippet snippet
+```
+Then, in your _Layout.cshtml file (to the end of ```<head>``` section but before any other script).
+```html
+ @Html.Raw(JavaScriptSnippet.FullScript)
+</head>
+```
+
 
 ## Run your app and view your telemetry
 
