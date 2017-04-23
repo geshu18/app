@@ -137,7 +137,7 @@ In `_ViewImports.cshtml`, add injection:
 ```
 Then, in your _Layout.cshtml file (to the end of ```<head>``` section but before any other script).
 ```html
- @Html.Raw(JavaScriptSnippet.FullScript)
+ @Html.Raw(snippet.FullScript)
 </head>
 ```
 
