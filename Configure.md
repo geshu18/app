@@ -68,15 +68,15 @@ Add additional telemetry item properties
 ========================================
 Add properties for request data item
 ------------------------------------
-If you want to add additional properties for request telemetry you need to get an instance of ```RequestTelemetry``` via dependency injection:
+If you want to add additional properties for request telemetry you need to get an instance of ```RequestTelemetry``` from ```HttpContext.Features```:
 ``` c#
 public class HomeController : Controller
 {
     private RequestTelemetry requestTelemetry;
 
-    public HomeController(RequestTelemetry requestTelemetry)
+    public HomeController()
     {
-        this.requestTelemetry = requestTelemetry;
+        this.requestTelemetry = HttpContext.Features.Get<RequestTelemetry>();
     }
 ```
 and then add required properties:
