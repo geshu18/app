@@ -1,5 +1,6 @@
 Documentation
 - [Getting started](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Getting-Started)
+- [Getting started for a .NET Core console application](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Getting-Started-for-a-.NET-Core-console-application)
 - [Configure](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Configure)
 - [Requests processing](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Requests-Processing)
 - [Dependency Tracking and Performance Counters](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Dependency-Tracking-and-Performance-Counter-Collection)
