@@ -75,7 +75,7 @@ Then add the following dependency entries to your project.json if they are not d
 
 Then add the code that parses configuration if you don't have it already in the method `Startup`.
 
-```C#
+```csharp
   // Setup configuration sources.
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
