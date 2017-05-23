@@ -28,9 +28,9 @@ Add the following entry to the  `dependencies` section.
 }
 ```
 
-Verify the version number: get the latest from the [Release page](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases). 
+Verify the version number: get the latest from the [Releases page](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases). 
 
-In the case of **.NET Core** applications, if you run into restore errors with respect to Application Insights dependency, please add  "dnxcore50"  and  "portable-net45+win8"  to the imports list (if it does not exist), under  frameworks  section of  `project.json`, as shown below. Please see [Migrating from DNX](https://docs.microsoft.com/en-us/dotnet/articles/core/migrating-from-dnx) for more details.
+In the case of **.NET Core** applications, if you run into restore errors with respect to Application Insights dependency, please add "dnxcore50" and "portable-net45+win8" to the imports list (if it does not exist), under the frameworks section of  `project.json`, as shown below. Please see [Migrating from DNX](https://docs.microsoft.com/en-us/dotnet/articles/core/migrating-from-dnx) for more details.
 
 ```JSON
 {
@@ -55,9 +55,9 @@ Add the instrumentation key of your Application Insights web application resourc
 }
 ```
 
-## Add Application Insights instrumentation code to  startup.cs  
+## Add Application Insights instrumentation code to startup.cs 
 
-If you don't already have the code that parses appsettings.json file and initializes configuration variable, create Configuration variable:
+If you don't already have the code that parses the appsettings.json file and initializes the configuration variable then create Configuration variable:
 
 ```
 
@@ -79,26 +79,37 @@ Then add the code that parses configuration if you don't have it already in the 
             // Setup configuration sources.
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
 
             Configuration = builder.Build();
 ```
 
-In the method `Startup` make sure to set Application Insights settings overrides. Specifically, set developer mode to true in the development environment:
+If you have a `Main` method (e.g. in Program.cs) with a call to create a ```new WebHostBuilder()``` then make sure it has a chained call to ```UseApplicationInsights()``` like the example below:
 
 ```C#
-if (env.IsDevelopment())
-{
-    builder.AddApplicationInsightsSettings(developerMode: true);
-}
+        public static void Main(string[] args)
+        {
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .UseApplicationInsights()
+                .Build();
+
+            host.Run();
+        }
 ```
 
-In the method `ConfigureServices` add the Application Insights service. You'll need to add namespace  `Microsoft.ApplicationInsights.AspNetCore` in the using list:
+Otherwise, in the method `ConfigureServices` add the Application Insights service. You'll need to add the namespace `Microsoft.ApplicationInsights.AspNetCore` to the using list:
 
 ```C#
-
 services.AddApplicationInsightsTelemetry(Configuration);
 ```
+
+Please note that `AddApplicationInsightsTelemetry` and `UseApplicationInsights` are intended to be mutually exclusive, only use one or the other and not both together.  The preferred default mechanism is to use the `UseApplicationInsights` extension methond from the `WebHostBuilder` instance.  The older extension method `AddApplicationInsightsTelemetry` on the IServiceCollection is still available for customized configuration using one of its overloaded signatures.
 
 ## Add Application Insights JavaScript instrumentation to the  _ViewImports.cshtml ,  _Layout.cshtml  
 
@@ -128,5 +139,3 @@ In `_Layout.cshtml`, insert HtmlHelper to the end of `<head>` section but before
 * [Monitor dependencies](https://azure.microsoft.com/documentation/articles/app-insights-dependencies/) to see whether REST, SQL or other external resources are slowing you down.
 * [Use the API](https://azure.microsoft.com/documentation/articles/app-insights-api-custom-events-metrics/) to send your own events and metrics for a more detailed view of your app's performance and usage.
 * [Availability tests](https://azure.microsoft.com/documentation/articles/app-insights-monitor-web-app-availability/) check your app constantly from around the world. 
-
-
