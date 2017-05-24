@@ -109,7 +109,7 @@ Otherwise, in the method `ConfigureServices` add the Application Insights servic
 services.AddApplicationInsightsTelemetry(Configuration);
 ```
 
-Please note that `AddApplicationInsightsTelemetry` and `UseApplicationInsights` are intended to be mutually exclusive, only use one or the other and not both together.  The preferred default mechanism is to use the `UseApplicationInsights` extension methond from the `WebHostBuilder` instance.  The older extension method `AddApplicationInsightsTelemetry` on the IServiceCollection is still available for customized configuration using one of its overloaded signatures.
+Please note that `AddApplicationInsightsTelemetry` and `UseApplicationInsights` are intended to be mutually exclusive, only use one or the other and not both together.  The preferred default mechanism is to use the `UseApplicationInsights` extension method from the `WebHostBuilder` instance.  The older extension method `AddApplicationInsightsTelemetry` on the IServiceCollection is still available for customized configuration using one of its overloaded signatures.
 
 ## Add Application Insights JavaScript instrumentation to the  _ViewImports.cshtml ,  _Layout.cshtml  
 
