@@ -31,7 +31,7 @@ Add the following entry to the `dependencies`` section.
 
 Verify the version number: get the latest from the [Release page](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases). 
 
-In case of **.NET Core** applications, if you run into restore errors with respect to application insights dependency, please add ```"dnxcore50"``` and ```"portable-net45+win8" ``` to the imports list (if it does not exist), under ```frameoworks``` section of ```project.json```, as described below. Please visit [Migrating from DNX](http://dotnet.github.io/docs/core-concepts/dnx-migration.html) for more details.
+In case of **.NET Core** applications, if you run into restore errors with respect to application insights dependency,  add ```"dnxcore50"``` and ```"portable-net45+win8" ``` to the imports list (if it does not exist), under ```frameoworks``` section of ```project.json```, as described below. See [Migrating from DNX](http://dotnet.github.io/docs/core-concepts/dnx-migration.html) for more details.
 ``` json
 {
     "frameworks": {
@@ -96,7 +96,7 @@ In the method ```ConfigureServices``` add Application Insights service. You'll n
 services.AddApplicationInsightsTelemetry(Configuration);
 ```
 
-In the method ```Configure``` add Application Insights request and exception tracking middleware. Please note that request tracking middleware should be added as the very first middleware in pipeline:
+In the method ```Configure``` add Application Insights request and exception tracking middleware. Note that request tracking middleware should be added as the very first middleware in pipeline:
 
 **Note: If you're using version 2.0 you will not include ```app.UseApplicationInsightsRequestTelemetry();``` and ```app.UseApplicationInsightsExceptionTelemetry();```, since they are managed internally.**
 
