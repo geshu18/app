@@ -3,8 +3,7 @@
 > **Starting with Asp.Net Core 2.0, ApplicationInsights is included by default. 
 The only thing needed is to configure instrumentation key so that telemetry is sent to ApplicationInsights service.**
 It is important to note that, even if instrumentation key is not added, ApplicationInsights will be enabled while debugging under 
-Visual Studio 2017, and ApplicationInsights telemetry will be shown in Visual Studio 2017 itself. However, nothing gets sent to 
-the ApplicationInsights service, unless an instrumentation key is added.
+Visual Studio 2017, and ApplicationInsights telemetry will be shown in Visual Studio 2017 itself. However, nothing gets sent to the ApplicationInsights service, unless an instrumentation key is added.
 
 You probably don't need to follow these manual steps below (except the instrumentation key section) unless you upgraded from a previous version.
 
@@ -24,7 +23,7 @@ Follow the steps below, skippings the ones as indicated:
 
 ## Add Application Insights NuGet package dependency to `.csproj`
 
-If the following package reference already exists in you `.csproj`, then there is no need to explicitly add ApplicationInsights package. This  is a meta package
+If the following package reference already exists in you `.csproj`, then there is no need to explicitly add ApplicationInsights package. This is a meta package
 and it contains the ApplicationInsights package.
 ```
 <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
@@ -38,7 +37,7 @@ If the above package reference is not present, then add the following to explici
 Verify the version number: get the latest from the [Releases page](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases). 
 
 As of now, the version of Microsoft.ApplicationInsights.AspNetCore included in Microsoft.AspNetCore.All (v2.0.0) meta package is 2.1.1.
-You can explicitly add reference to Microsoft.ApplicationInsights.AspNetCore when you want a version higher than the one shipped with Microsoft.AspNetCore.All
+You can explicitly add a reference to Microsoft.ApplicationInsights.AspNetCore when you want a version higher than the one shipped with Microsoft.AspNetCore.All
 metapackage.
 
 ## Add the instrumentation key. 
@@ -56,44 +55,44 @@ telemetry to be sent to ApplicationInsights service.
 ```
 Option 2 : Set instrumentation key into environment variable  APPINSIGHTS_INSTRUMENTATIONKEY
 
-Option 3: Add instrumentation key in code while enabling ApplicationInsights instrumentation. See following section. 
+Option 3: Add instrumentation key in code while enabling ApplicationInsights instrumentation. See the following section. 
 
 ## Add Application Insights instrumentation in code.
-This step is not required if you are starting with a new Asp.Net Core 2.0 project. You may use this to programatically control ApplicationInsights behaviour though, like 
+This step is not required if you are starting with a new Asp.Net Core 2.0 project. You may use this to programatically control ApplicationInsights behavior though, like 
 setting instrumentation key in code.
 
-Starting with Asp.Net Core 2.0, all project templates include call to WebHost.CreateDefaultBuilder() in Program.cs which automatically does
+Starting with Asp.Net Core 2.0, all project templates include a call to WebHost.CreateDefaultBuilder() in Program.cs which automatically does
 everything needed to read settings from appsettings.json/environment variables and initialize configuration variables.
 
 ```C#            
-     public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();       
+public static IWebHost BuildWebHost(string[] args) =>
+    WebHost.CreateDefaultBuilder(args)
+        .UseStartup<Startup>()
+        .Build();       
 ```
 
 Modify the above code as follows to configure ApplicationInsights.
 
 ```C#
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseApplicationInsights()
-                .Build();
+public static IWebHost BuildWebHost(string[] args) =>
+    WebHost.CreateDefaultBuilder(args)
+        .UseStartup<Startup>()
+        .UseApplicationInsights()
+        .Build();
 ```
 
 Alternatively, in the method `ConfigureServices` of your Startup class, add the Application Insights service as follows:
 
 ```C#
-		public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
-            services.AddApplicationInsightsTelemetry();
-        }
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddMvc();
+    services.AddApplicationInsightsTelemetry();
+}
 ```
 
-Both the above option allows passing instrumentation key as a parameter to the call UseApplicationInsights() or AddApplicationInsightsTelemetry(). This is required if the key
-is not set via options mentiond at the beginning.
+Both options above allow passing an instrumentation key as a parameter to the call UseApplicationInsights() or AddApplicationInsightsTelemetry(). This is required if the key
+is not set via options mentioned at the beginning.
 
 Please note that `AddApplicationInsightsTelemetry` and `UseApplicationInsights` are intended to be mutually exclusive, only use one or the other and not both together.
 The preferred default mechanism is to use the `UseApplicationInsights` extension method from the `WebHostBuilder` instance.  
