@@ -11,9 +11,9 @@ You probably don't need to follow these manual steps below (except the instrumen
 Follow the steps below, skippings the ones as indicated:
 
 * Create an Application Insights resource
-* Add Application Insights NuGet package dependency to `csproj`  
+* Add Application Insights NuGet package dependency to `.csproj`
 * Add Application Insights instrumentation key
-* Add Application Insights instrumentation code to the `startup.cs`  
+* Add Application Insights instrumentation in code  
 * Add Application Insights JavaScript instrumentation to the `_ViewImports.cshtml`,  `_Layout.cshtml`  
 
 ## Create an Application Insights resource
@@ -22,10 +22,10 @@ Follow the steps below, skippings the ones as indicated:
 2. Create a new Application Insights resource. (Click **New -> Monitoring + management -> Application Insights**). Select the ASP.NET application type.
 3. In your new resource, open the **Essentials** drop-down so that you can copy the Instrumentation Key - you'll need it shortly. 
 
-## Add Application Insights NuGet package dependency to `csproj`
+## Add Application Insights NuGet package dependency to `.csproj`
 
-If the following package reference already exists, then there is no need to explicitly add ApplicationInsights package. This meta package
-contains the ApplicationInsights package.
+If the following package reference already exists in you `.csproj`, then there is no need to explicitly add ApplicationInsights package. This  is a meta package
+and it contains the ApplicationInsights package.
 ```
 <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
 ```
