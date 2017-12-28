@@ -30,7 +30,7 @@ this.Resolver.GetService<TelemetryClient>().Context.InstrumentationKey = "111111
 
 Track custom trace/event/metric
 ===============================
-Please refer to [Applicaiton Insights custom metrics API reference](http://azure.microsoft.com/en-us/documentation/articles/app-insights-custom-events-metrics-api/) for description of custom data reporting in Application Insights.
+Please refer to [Application Insights custom metrics API reference](http://azure.microsoft.com/en-us/documentation/articles/app-insights-custom-events-metrics-api/) for description of custom data reporting in Application Insights.
 
 Get TelemetryClient using dependency injection: 
 ``` c#
