@@ -19,7 +19,7 @@ If you prefer, you can use Visual Studio to perform the first three steps by usi
 3. In your new resource, open the **Essentials** drop-down so that you can copy the Instrumentation Key - you'll need it shortly. 
 
 ## Add Application Insights NuGet package dependency to `project.json`
-Add the following entry to the `dependencies`` section. 
+Add the following entry to the `dependencies` section. 
 
 ``` json
 {
