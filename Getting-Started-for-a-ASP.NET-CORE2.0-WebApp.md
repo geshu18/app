@@ -56,14 +56,13 @@ telemetry to be sent to ApplicationInsights service.
   }
 }
 ```
+Note: Due to https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/605, this won't work outside Visual Studio environment.
 Option 2 : Set instrumentation key into environment variable  APPINSIGHTS_INSTRUMENTATIONKEY
+eg:set APPINSIGHTS_INSTRUMENTATIONKEY=ikeygoeshere
 
 Option 3: Add instrumentation key in code while enabling ApplicationInsights instrumentation. See the following section. 
 
 ## Add Application Insights instrumentation in code.
-This step is not required if you are starting with a new Asp.Net Core 2.0 project. You may use this to programatically control ApplicationInsights behavior though, like 
-setting instrumentation key in code.
-
 Starting with Asp.Net Core 2.0, all project templates include a call to WebHost.CreateDefaultBuilder() in Program.cs which automatically does
 everything needed to read settings from appsettings.json/environment variables and initialize configuration variables.
 
