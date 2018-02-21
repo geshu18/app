@@ -34,7 +34,7 @@ and it contains the ApplicationInsights package.
 If the above package reference is not present, then add the following to explicitly add ApplicationInsights.
 
 ```
-<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.2.0-beta1" />
+<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.2.0" />
 ```
 
 Verify the version number: get the latest from the [Releases page](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases). 
