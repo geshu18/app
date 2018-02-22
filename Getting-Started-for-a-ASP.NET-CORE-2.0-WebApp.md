@@ -59,8 +59,8 @@ telemetry to be sent to ApplicationInsights service.
 }
 ```
 ### Option 2:
-Set instrumentation key into environment variable  APPINSIGHTS_INSTRUMENTATIONKEY
-eg:set APPINSIGHTS_INSTRUMENTATIONKEY=ikeygoeshere
+Set instrumentation key into environment variable  ApplicationInsights:InstrumentationKey
+eg:set ApplicationInsights:InstrumentationKey=ikeygoeshere
 
 Both the above options work only if Application Insights is enabled is code with UseApplicationInsights() extension. As of now its not supported with AddApplicationInsightsTelemetry() as mentioned [here](https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/605)
 
@@ -110,6 +110,16 @@ public void ConfigureServices(IServiceCollection services)
     services.AddApplicationInsightsTelemetry();
 }
 ```
+
+This method has an override which can accept configuration as well. 
+```C#
+var configBuilder = new ConfigurationBuilder()
+                .SetBasePath(this.hostingEnvironment.ContentRootPath)
+                .AddEnvironmentVariables();
+var Configuration= configBuilder.Build();
+services.AddApplicationInsightsTelemetry(Configuration);
+```
+
 
 
 ## Add Application Insights JavaScript instrumentation to the  _ViewImports.cshtml ,  _Layout.cshtml  
