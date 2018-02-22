@@ -45,8 +45,9 @@ metapackage.
 
 ## Add the instrumentation key. 
 
-### Option 1: 
-Use `appsettings.json`. You can control whether telemetry is sent to ApplicationInsights service by setting/not setting instrumentation key. You
+### Option 1: Use `appsettings.json`. 
+
+You can control whether telemetry is sent to ApplicationInsights service by setting/not setting instrumentation key. You
 may have separate `appsettings.json` for each environment, and each can contain different instrumentation keys, or do not contain anything at all if you do not want
 telemetry to be sent to ApplicationInsights service.
 
@@ -77,7 +78,7 @@ is not set via options mentioned at the beginning.
 
 The preferred default mechanism is to use the `UseApplicationInsights` extension method from the `WebHostBuilder` instance.  
 
-Starting with Asp.Net Core 2.0, all project templates include a call to WebHost.CreateDefaultBuilder() in Program.cs which automatically does everything needed to read settings from appsettings.json/environment variables and initialize configuration variables.
+Starting with Asp.Net Core 2.0, all project templates include a call to `WebHost.CreateDefaultBuilder()` in `Program.cs` which automatically does everything needed to read settings from appsettings.json/environment variables and initialize configuration variables.
 
 ```C#            
 public static IWebHost BuildWebHost(string[] args) =>
@@ -98,7 +99,7 @@ public static IWebHost BuildWebHost(string[] args) =>
 
 ### Option 2: Startup.cs
 
-The older extension method `AddApplicationInsightsTelemetry` on the IServiceCollection is still available for customized configuration using one of its overloaded signatures.
+The older extension method `AddApplicationInsightsTelemetry` on the `IServiceCollection` is still available for customized configuration using one of its overloaded signatures.
 
 In the method `ConfigureServices` of your Startup class, add the Application Insights service as follows:
 
