@@ -45,7 +45,8 @@ metapackage.
 
 ## Add the instrumentation key. 
 
-Option 1 : Use `appsettings.json`. You can control whether telemetry is sent to ApplicationInsights service by setting/not setting instrumentation key. You
+### Option 1: 
+Use `appsettings.json`. You can control whether telemetry is sent to ApplicationInsights service by setting/not setting instrumentation key. You
 may have separate `appsettings.json` for each environment, and each can contain different instrumentation keys, or do not contain anything at all if you do not want
 telemetry to be sent to ApplicationInsights service.
 
@@ -56,16 +57,27 @@ telemetry to be sent to ApplicationInsights service.
   }
 }
 ```
-Option 2 : Set instrumentation key into environment variable  APPINSIGHTS_INSTRUMENTATIONKEY
+### Option 2:
+Set instrumentation key into environment variable  APPINSIGHTS_INSTRUMENTATIONKEY
 eg:set APPINSIGHTS_INSTRUMENTATIONKEY=ikeygoeshere
 
 Both the above options work only if Application Insights is enabled is code with UseApplicationInsights() extension. As of now its not supported with AddApplicationInsightsTelemetry() as mentioned [here](https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/605)
 
-Option 3: Add instrumentation key in code while enabling ApplicationInsights instrumentation. See the following section. 
+### Option 3:
+Add instrumentation key in code while enabling ApplicationInsights instrumentation. See the following section. 
 
 ## Add Application Insights instrumentation in code.
-Starting with Asp.Net Core 2.0, all project templates include a call to WebHost.CreateDefaultBuilder() in Program.cs which automatically does
-everything needed to read settings from appsettings.json/environment variables and initialize configuration variables.
+
+There are two options for instrumenting your code. These are intended to be mutually exclusive, only use one or the other and not both together!
+
+Both options below allow passing an instrumentation key as a parameter to the call `AddApplicationInsightsTelemetry()` or `UseApplicationInsights()`. This is required if the key
+is not set via options mentioned at the beginning.
+
+### Option 1: Program.cs (Recommended)
+
+The preferred default mechanism is to use the `UseApplicationInsights` extension method from the `WebHostBuilder` instance.  
+
+Starting with Asp.Net Core 2.0, all project templates include a call to WebHost.CreateDefaultBuilder() in Program.cs which automatically does everything needed to read settings from appsettings.json/environment variables and initialize configuration variables.
 
 ```C#            
 public static IWebHost BuildWebHost(string[] args) =>
@@ -84,7 +96,11 @@ public static IWebHost BuildWebHost(string[] args) =>
         .Build();
 ```
 
-Alternatively, in the method `ConfigureServices` of your Startup class, add the Application Insights service as follows:
+### Option 2: Startup.cs
+
+The older extension method `AddApplicationInsightsTelemetry` on the IServiceCollection is still available for customized configuration using one of its overloaded signatures.
+
+In the method `ConfigureServices` of your Startup class, add the Application Insights service as follows:
 
 ```C#
 public void ConfigureServices(IServiceCollection services)
@@ -94,13 +110,6 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Both options above allow passing an instrumentation key as a parameter to the call UseApplicationInsights() or AddApplicationInsightsTelemetry(). This is required if the key
-is not set via options mentioned at the beginning.
-
-Please note that `AddApplicationInsightsTelemetry` and `UseApplicationInsights` are intended to be mutually exclusive, only use one or the other and not both together.
-The preferred default mechanism is to use the `UseApplicationInsights` extension method from the `WebHostBuilder` instance.  
-The older extension method `AddApplicationInsightsTelemetry` on the IServiceCollection is still available for customized configuration using one of its
-overloaded signatures.
 
 ## Add Application Insights JavaScript instrumentation to the  _ViewImports.cshtml ,  _Layout.cshtml  
 
