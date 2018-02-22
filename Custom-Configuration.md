@@ -56,7 +56,7 @@ Track event:
 
 Add application level context properties
 ========================================
-You may want to set additional properties on all telemetry data your application reports. Since it's a global setting you need to do it in "Configure" method of your application:
+You may want to set additional properties on all telemetry data your application reports. Since it's a global setting you need to do it in "Configure" method of your Startup class:
 ```
 public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
 {
@@ -130,12 +130,25 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 
 Redirect traffic to the different endpoint
 ==========================================
-***Note:*** This is not implemented yet.
+
 Configuration-based approach
 ----------------------------
 If you are using json configuration provider - add the following into config.json
 ```
 "ApplicationInsights": {
-    "Endpoint": "http://localhost:8888/v2/track"
-}
+    "InstrumentationKey": "ikey",
+    "TelemetryChannel": {
+      "EndpointAddress": "http://localhost:8888/v2/track"
+    }
+  }
+```
+Then use UseApplicationInsights() method to add application insights.
+
+If using AddApplicationInsightsTelemetry(), construct Configuration first and pass it to AddApplicationInsightsTelemetry in ConfigureServices method of Startup class as shown in below example.
+```C#
+var configBuilder = new ConfigurationBuilder()
+               .SetBasePath(this.HostingEnvironment.ContentRootPath)
+               .AddJsonFile("appsettings.json", true)               
+               .AddEnvironmentVariables();            
+            services.AddApplicationInsightsTelemetry(configBuilder.Build());
 ```
