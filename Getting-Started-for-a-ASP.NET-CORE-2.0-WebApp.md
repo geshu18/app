@@ -76,7 +76,7 @@ is not set via options mentioned at the beginning.
 
 ### Option 1: Program.cs (Recommended)
 
-The preferred default mechanism is to use the `UseApplicationInsights` extension method from the `WebHostBuilder` instance.  
+The preferred default mechanism is to use the `UseApplicationInsights` extension method from the `WebHostBuilder` instance.
 
 Starting with Asp.Net Core 2.0, all project templates include a call to `WebHost.CreateDefaultBuilder()` in `Program.cs` which automatically does everything needed to read settings from appsettings.json/environment variables and initialize configuration variables.
 
