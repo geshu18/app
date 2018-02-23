@@ -77,13 +77,12 @@ If using the above method to configure sampling, please make sure to use ```aiOp
 
 [Metrics Stream](https://azure.microsoft.com/en-us/blog/live-metrics-stream/) captures the live metrics and provides the current working scenario of the application.
 
-> Note: Currently, metrics stream uses telemetry processors, which are enabled only in full framework. Therefore, core framework as of today, does not support metrics stream collection.
+Live metrics feature is enabled in both .NET Framework and .NET Core from 2.2.0 of SDK. Earlier versions support Live Metrics only for .NET Framework.
 
-Metrics Stream is enabled by default in full framework, when Application Insights (>= [1.0.0-rc2-final](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases/tag/v1.0.0-rc2-final)) is installed to monitor your live ASP.NET Core web applications. The default metrics collection can be disabled when we add Application Insights service, in the method ```ConfigureServices```, using ```ApplicationInsightsServiceOptions```:
+Metrics Stream is now enabled by default. This can be disabled when we add Application Insights service, in the method ```ConfigureServices```, using ```ApplicationInsightsServiceOptions```:
 
 ``` c#
 var aiOptions = new Microsoft.ApplicationInsights.AspNetCore.Extensions.ApplicationInsightsServiceOptions();
 aiOptions.EnableQuickPulseMetricStream = false;
-
-services.AddApplicationInsightsTelemetry(Configuration, aiOptions);
+services.AddApplicationInsightsTelemetry(aiOptions);
 ```
