@@ -28,6 +28,12 @@ Assuming you need to change instrumentation key after Startup.cs. You need to ge
 this.Resolver.GetService<TelemetryClient>().Context.InstrumentationKey = "11111111-2222-3333-4444-555555555555";
 ```
 
+Alternately, modify the key in the TelemetryConfiguration.Active instance directly.
+```
+TelemetryConfiguration.Active.InstrumentationKey = "ikeyhere";
+```
+
+
 Track custom trace/event/metric
 ===============================
 Please refer to [Application Insights custom metrics API reference](http://azure.microsoft.com/en-us/documentation/articles/app-insights-custom-events-metrics-api/) for description of custom data reporting in Application Insights.
