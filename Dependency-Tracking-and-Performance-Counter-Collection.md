@@ -10,7 +10,7 @@ Application Insights references [ApplicationInsights-server-dotnet](https://gith
 In order to disable the services, you need to manually remove the modules from the existing list of services in the method ```ConfigureServices```. Please note that telemetry modules should be removed only after adding Application Insights to the services.
 
 ``` c#
-// Removing dependency tracking telemetry module - to disable default dependency tracking -- This will not work currently
+// Removing dependency tracking telemetry module - to disable default dependency tracking -- This will not work currently as DependencyTrackingTelemetryModule will not be instantiated until end of ConfigureServices method.
 var dependencyTrackingService = services.FirstOrDefault<ServiceDescriptor>(t => t.ImplementationType == typeof(DependencyTrackingTelemetryModule));
 if (dependencyTrackingService!= null)
 {
@@ -27,6 +27,7 @@ if (performanceCounterService != null)
 
 ## Configuring Telemetry Module Services
 Inorder to configure any properties of TelemetyModules, obtain the module from DI Container first. Then modify the required properties, and re-initialize the module with currently active Telemetry Configuration.
+
 For eg:, to modify DependencyTrackingTelemetryModule to disable setting Correlationheaders, the following code is required in the Configure method of you Startup class.
 ```
 DependencyTrackingTelemetryModule dep;
