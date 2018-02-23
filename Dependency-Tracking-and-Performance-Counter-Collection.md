@@ -1,19 +1,16 @@
-[Dependency tracking](https://azure.microsoft.com/documentation/articles/app-insights-dependencies/) and [performance counter collection](https://azure.microsoft.com/documentation/articles/app-insights-web-monitor-performance/) are by default enabled in ASP.NET Core on .NET Framework, when Application Insights (>= [1.0.0-RC1-Update2](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases/tag/v1.0.0-rc1-update2)) is installed to monitor your live ASP.NET Core web app.
-`Note: Currently not supported in .NET Core.` 
+[Dependency tracking](https://azure.microsoft.com/documentation/articles/app-insights-dependencies/) module is enabled by default when application is targeting both .NET Core and .NET Framework.
+[Performance counter collection](https://azure.microsoft.com/documentation/articles/app-insights-web-monitor-performance/) is enabled by default in both .NET Core and .NET Framework - However there will be no perf counter collection in .NET Core as perf counters are not supported in .NET Core. Live metrics is enabled in both cases though.
+
 ## Telemetry Modules and Default Tracking
 
-Application Insights references [ApplicationInsights-server-dotnet](https://github.com/Microsoft/ApplicationInsights-server-dotnet/releases/tag/InitialCommit) that includes telemetry modules (```DependencyTrackingTelemetryModule``` and ```PerformanceCollectorModule```), which are responsible for enabling default dependency tracking and performance counter collection. Both the telemetry modules are added along with telemetry initializers, when Application Insights is added to services in the method ```ConfigureServices``` ([Getting Started](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Getting-Started)). 
-
-``` c#
-services.AddApplicationInsightsTelemetry(Configuration);
-```
+Application Insights references [ApplicationInsights-server-dotnet](https://github.com/Microsoft/ApplicationInsights-server-dotnet/releases/tag/InitialCommit) that includes telemetry modules (```DependencyTrackingTelemetryModule``` and ```PerformanceCollectorModule```), which are responsible for enabling default dependency tracking and performance counter collection. Both the telemetry modules are added along with telemetry initializers, when Application Insights is added to the application.
 
 ## Disabling Telemetry Module Services
 
 In order to disable the services, you need to manually remove the modules from the existing list of services in the method ```ConfigureServices```. Please note that telemetry modules should be removed only after adding Application Insights to the services.
 
 ``` c#
-// Removing dependency tracking telemetry module - to disable default dependency tracking
+// Removing dependency tracking telemetry module - to disable default dependency tracking -- This will not work currently
 var dependencyTrackingService = services.FirstOrDefault<ServiceDescriptor>(t => t.ImplementationType == typeof(DependencyTrackingTelemetryModule));
 if (dependencyTrackingService!= null)
 {
@@ -28,3 +25,19 @@ if (performanceCounterService != null)
 }
 ```
 
+## Configuring Telemetry Module Services
+Inorder to configure any properties of TelemetyModules, obtain the module from DI Container first. Then modify the required properties, and re-initialize the module with currently active Telemetry Configuration.
+For eg:, to modify DependencyTrackingTelemetryModule to disable setting Correlationheaders, the following code is required in the Configure method of you Startup class.
+```
+DependencyTrackingTelemetryModule dep;
+            var modules = app.ApplicationServices.GetServices<ITelemetryModule>();
+            foreach(var module in modules)
+            {
+                if (module is DependencyTrackingTelemetryModule)
+                {
+                    dep = module as DependencyTrackingTelemetryModule;
+                    dep.SetComponentCorrelationHttpHeaders = false;                    
+                    dep.Initialize(TelemetryConfiguration.Active);                    
+                }
+            }
+```
