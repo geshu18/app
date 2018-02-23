@@ -61,7 +61,7 @@ Sampling can also be enabled using extension methods of ```TelemetryProcessorCha
 ``` c#
 var builder = telemetryConfiguration.TelemetryProcessorChainBuilder;
 // Using adaptive sampling
-builder.UseAdaptiveSampling();
+builder.UseAdaptiveSampling(maxTelemetryItemsPerSecond:10);
  
 // Using fixed rate sampling   
 double fixedSamplingPercentage = 50;
