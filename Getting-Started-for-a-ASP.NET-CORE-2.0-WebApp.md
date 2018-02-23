@@ -1,6 +1,6 @@
 [Application Insights](https://docs.microsoft.com/azure/application-insights/app-insights-asp-net) is an extensible analytics platform that monitors the performance and usage of your live ASP.NET Core web applications.
 
-**With Asp.Net Core 2.0, ApplicationInsights is included by default.**
+**With Asp.Net Core 2.0, ApplicationInsights is included by default when running from Visual Studio.**
 You only need to configure the instrumentation key so that telemetry is sent to ApplicationInsights service.
 If instrumentation key is not added:
 * ApplicationInsights will be enabled while debugging under 
