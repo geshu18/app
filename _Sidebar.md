@@ -7,11 +7,8 @@ Documentation
 - [Dependency Tracking and Performance Counters](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Dependency-Tracking-and-Performance-Counter-Collection)
 - [Telemetry Processors: Sampling and Metrics Stream](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Telemetry-Processors:-Sampling-and-Metrics-Stream)
 - [FAQs](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/FAQs)
-Development
-- [Testing](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Testing)
 
-Meeting notes
-- [4/13/2015 AI Data Collection](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/April-14,-2015.-AI-data-collection-approach)
+- [Testing](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Testing)
 
 Load Testing
 - [Environment](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Load-testing)
