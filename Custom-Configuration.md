@@ -124,9 +124,29 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
     configuration.TelemetryInitializers.Add(initializer);
 ``` 
 
-Remove default telemetry initializers
+Configure Telemetry initializers
 =====================================
-You need to get TelemetryClient instance to make sure that global telemetry configuration got initialized. After that you can modify the list of default telemetry initializers: 
+## Adding new TelemetryInitializer.
+Create new Initializer.
+
+Register it into DI Containers before AddApplicationInsightsTelemetry() is called in the ConfigureServices of your Startup class.
+For eg:
+```
+services.AddSingleton<ITelemetryInitializer>(new MyCustomTelemetryInitializer());
+```
+This will ensure the telemetry initializer will be part of the TelemetryConfiguration object.
+
+Alternately, one can obtain the TelemetryConfiguration object (either from DI or by using TelemetryConfiguration.Active), and add new initializers.
+```
+TelemetryConfiguration.Active.TelemetryInitializers.Add(new MyCustomTelemetryInitializer())
+```
+or 
+```
+var configuration= app.ApplicationServices.GetService<TelemetryConfiguration>();
+configuration.TelemetryInitializers.Add(new MyCustomTelemetryInitializer())
+```
+
+Similar approach can be used to remove all TelemetryInitializers. (or remove a specific one)
 ``` c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
 {
