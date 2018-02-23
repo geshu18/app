@@ -1,12 +1,12 @@
-[Telemetry Processors](https://azure.microsoft.com/en-us/documentation/articles/app-insights-api-filtering-sampling/#filtering-itelemetryprocessor) are enabled in ASP.NET Core on .NET Framework, when Application Insights (>= [1.0.0-RC1-Update4](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases/tag/v1.0.0-rc1-update4)) is installed to monitor your live ASP.NET Core web applications.
+[Telemetry Processors](https://azure.microsoft.com/en-us/documentation/articles/app-insights-api-filtering-sampling/#filtering-itelemetryprocessor) are enabled in ASP.NET Core on both .NET Framework and .NET Core.
 
-Telemetry processors, are configured as a part of telemetry configuration. From (>= [1.0.0-RC1-Update4](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases/tag/v1.0.0-rc1-update4)), ```TelemetryConfiguration.Active``` is enabled as the default telemetry configuration to configure modules and telemetry initializers. Once telemetry configuration instance is available, telemetry processors can be made available to the configuration. Following describes the process of [accessing telemetry configuration](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Telemetry-Processors:-Sampling-and-Quick-Pulse#accessing-telemetry-configuration), [using custom telemetry processors](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Telemetry-Processors:-Sampling-and-Quick-Pulse#using-custom-telemetry-processor), [enabling sampling](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Telemetry-Processors:-Sampling-and-Quick-Pulse#sampling) and [activating Metrics Stream](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Telemetry-Processors:-Sampling-and-Quick-Pulse#quick-pulse).
+Telemetry processors, are configured as a part of telemetry configuration. Once telemetry configuration instance is available, telemetry processors can be made available to the configuration. Following describes the process of [accessing telemetry configuration](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Telemetry-Processors:-Sampling-and-Quick-Pulse#accessing-telemetry-configuration), [using custom telemetry processors](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Telemetry-Processors:-Sampling-and-Quick-Pulse#using-custom-telemetry-processor), [enabling sampling](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Telemetry-Processors:-Sampling-and-Quick-Pulse#sampling) and [activating Metrics Stream](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Telemetry-Processors:-Sampling-and-Quick-Pulse#quick-pulse).
 
 > Note: It is best advised to use telemetry processors in the method ```ConfigureServices``` of application ```startup.cs```.
 
 ## Accessing Telemetry Configuration
 
-From (>= 1.0.0-RC1-Update4), telemetry configuration can be accessed either using ```Active```
+Telemetry configuration can be accessed either using ```Active```
 
 ``` c#
 var telemetryConfiguration = TelemetryConfiguration.Active
@@ -18,7 +18,6 @@ or by getting it through application builder services
 public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
 {
     var configuration= app.ApplicationServices.GetService<TelemetryConfiguration>();
-    configuration.TelemetryInitializers.Clear();
 ```
 
 ## Using Custom Telemetry Processor
@@ -54,8 +53,7 @@ Adaptive sampling is by default enabled for the applications. The default sampli
 ``` c#
 var aiOptions = new Microsoft.ApplicationInsights.AspNetCore.Extensions.ApplicationInsightsServiceOptions();
 aiOptions.EnableAdaptiveSampling = false;
-
-services.AddApplicationInsightsTelemetry(Configuration, aiOptions);
+services.AddApplicationInsightsTelemetry(aiOptions);
 ```
 
 Sampling can also be enabled using extension methods of ```TelemetryProcessorChainBuilder``` as described below:
@@ -71,6 +69,9 @@ builder.UseSampling(fixedSamplingPercentage);
 
 builder.Build();
 ```
+
+If using the above method to configure sampling, please make sure to use ```aiOptions.EnableAdaptiveSampling = false;``` settings with AddApplicationInsightsTelemetry(). Without this, there would be multiple sampling processors in the TelemetryProcessor chain leading to unintended consequences.
+
 
 ## Metrics Stream
 
