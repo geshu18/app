@@ -154,6 +154,9 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
     configuration.TelemetryInitializers.Clear();
 ```
 
+Removing a specific one from the built-in list of TelemetryInitializers is not possible currently because the classes are defined Internal. (Need reflection magic to achieve this)
+https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/346
+
 Redirect traffic to the different endpoint
 ==========================================
 
