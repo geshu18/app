@@ -3,6 +3,8 @@ When running the application from Visual Studio IDE, all traces logged via ```IL
 
 Following shows how to configure Application Insights to collect traces logged via ```ILogger``` interface.
 
+This document assumes that application insights ikey is configured already using instructions [here](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Getting-Started-for-a-ASP.NET-CORE-2.0-WebApp) 
+
 Application Insights SDK for Asp.Net Core provides an extension method ```ILoggerFactory``` on ```ILoggerFactory``` to configure logging. Modify the ```Startup.cs``` class of your application as follows to enable Application Insights logging.
 ```
 public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -14,4 +16,4 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 ```
 This above snippet causes all messages (Warning or above) to be sent to Application Insights. 
 
-As of today, this is the only way to enable application insights traces. We will be adding new extension methods on ```ILoggingBuilder``` (soon)[https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/536].
+As of today, this is the only way to enable application insights traces. We will be adding new extension methods on ```ILoggingBuilder``` [soon](https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/536).
