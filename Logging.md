@@ -1,4 +1,4 @@
-Application Insights SDK is integrated with Asp.Net Core's [logging infra](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging).
+Application Insights SDK is capable of collecting Trace telemetry from logs generated via Asp.Net Core's [logging infra](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging).
 When running the application from Visual Studio IDE, all traces logged via ```ILogger``` interface is automatically captured. If an ikey is configured, then these traces are sent to Application Insights service. To limit the level of logging captured by Application Insights when ran from Visual Studio see this [issue](https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/603)
 
 Following shows how to configure Application Insights to collect traces logged via ```ILogger``` interface.
