@@ -6,6 +6,7 @@ Documentation
 - [Requests processing](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Requests-Processing)
 - [Dependency Tracking and Performance Counters](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Dependency-Tracking-and-Performance-Counter-Collection)
 - [Telemetry Processors: Sampling and Metrics Stream](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Telemetry-Processors:-Sampling-and-Metrics-Stream)
+- [Logging](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Logging)
 - [FAQs](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/FAQs)
 
 - [Testing](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Testing)
