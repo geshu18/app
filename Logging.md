@@ -1,9 +1,9 @@
-Application Insights SDK is capable of collecting Trace telemetry from logs generated via Asp.Net Core's [logging infra](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging).
-When running the application from Visual Studio IDE, all traces logged via ```ILogger``` interface is automatically captured. If an ikey is configured, then these traces are sent to Application Insights service. To limit the level of logging captured by Application Insights when ran from Visual Studio see this [issue](https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/603)
+Application Insights SDK is capable of collecting Trace telemetry from logs generated via Asp.Net Core's [logging infrastructure](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging).
+When running the application from Visual Studio IDE, all traces logged via ```ILogger``` interface are automatically captured. If an instrumentation key is configured, then these traces are sent to the Application Insights service. To limit the level of logging captured by Application Insights when run from Visual Studio see this [issue](https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/603)
 
 Following shows how to configure Application Insights to collect traces logged via ```ILogger``` interface when running outside of Visual Studio.
 
-This document assumes that application insights ikey is configured already using instructions [here](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Getting-Started-for-a-ASP.NET-CORE-2.0-WebApp) 
+This document assumes that application insights instrumentation key is configured already using instructions [here](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Getting-Started-for-a-ASP.NET-CORE-2.0-WebApp) 
 
 Application Insights SDK for Asp.Net Core provides an extension method ```ILoggerFactory``` on ```ILoggerFactory``` to configure logging. Modify the ```Startup.cs``` class of your application as follows to enable Application Insights logging.
 ```
