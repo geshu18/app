@@ -1,3 +1,5 @@
+Note: this page is about **ASP.NET Core 1.0**. For current ASP.NET Core 2.0. see page [Getting started for Asp.Net Core 2.0](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/StartingDoc)
+
 Monitor your live ASP.NET Core applications with [Visual Studio Application Insights](https://azure.microsoft.com/documentation/articles/app-insights-overview/). Application Insights is an extensible analytics platform that monitors the performance and usage of your live web applications. With the feedback you get about the performance and effectiveness of your app in the wild, you can make informed choices about the direction of the design in each development lifecycle.
 
 Follow the details in this article to add Application Insights to your app. You'll make the following changes:
