@@ -1,6 +1,6 @@
 Documentation
 - [Getting started](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Getting-Started)
-- [Getting started for Asp.Net Core 2.0](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/StartingDoc)
+- [Getting started for Asp.Net Core 2.0](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Getting-Started-with-Application-Insights-for-ASP.NET-Core)
 - [Getting started for a .NET Core console application](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Getting-Started-for-a-.NET-Core-console-application)
 - [Custom Configuration](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Custom-Configuration)
 - [Requests processing](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Requests-Processing)
