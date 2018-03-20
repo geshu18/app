@@ -136,11 +136,8 @@ services.AddSingleton<ITelemetryInitializer>(new MyCustomTelemetryInitializer())
 ```
 This will ensure the telemetry initializer will be part of the TelemetryConfiguration object.
 
-Alternately, one can obtain the TelemetryConfiguration object (either from DI or by using TelemetryConfiguration.Active), and add new initializers.
-```
-TelemetryConfiguration.Active.TelemetryInitializers.Add(new MyCustomTelemetryInitializer())
-```
-or 
+Alternately, one can obtain the TelemetryConfiguration object from DI and add new initializers.
+
 ```
 var configuration= app.ApplicationServices.GetService<TelemetryConfiguration>();
 configuration.TelemetryInitializers.Add(new MyCustomTelemetryInitializer())
@@ -153,9 +150,6 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
     var configuration= app.ApplicationServices.GetService<TelemetryConfiguration>();
     configuration.TelemetryInitializers.Clear();
 ```
-
-Removing a specific one from the built-in list of TelemetryInitializers is not possible currently because the classes are defined Internal. (Need reflection magic to achieve this)
-https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/346
 
 Redirect traffic to the different endpoint
 ==========================================
