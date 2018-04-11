@@ -175,3 +175,15 @@ var configBuilder = new ConfigurationBuilder()
                .AddEnvironmentVariables();            
             services.AddApplicationInsightsTelemetry(configBuilder.Build());
 ```
+
+Configuring Telemetry Channel
+==========================================
+Add the required channel to DI in ConfigureServices() method of your application's Startup class.
+For eg:, the following is all that's needed to configure channel
+```
+services.AddSingleton(typeof(ITelemetryChannel), new InMemoryChannel() {MaxTelemetryBufferCapacity = 19898 });
+```
+If no channel is explicitly added by user, then SDK by default sets up ServerTelemetryChannel. Adding any ITelemetryChannel to DI overrides default channel.
+
+
+
