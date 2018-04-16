@@ -31,11 +31,14 @@ if (performanceCounterService != null)
 
 ## Configuring Telemetry Module Services
 In order to configure any of the TelemetryModules, use the extension method `ConfigureTelemetryModule<T>` on `IServiceCollection` (available from 2.3.0-beta1 onwards)
-For eg:, to modify DependencyTrackingTelemetryModule to disable setting Correlationheaders, the following code is required in the ConfigureServices method of your application's Startup class.
+Use the following code in the ConfigureServices method of your application's Startup class to configure any module.
 ```
 public void ConfigureServices(IServiceCollection services)
 {
 ......
 services.AddApplicationInsightsTelemetry("ikey");
 services.ConfigureTelemetryModule<DependencyTrackingTelemetryModule>( module => module.SetComponentCorrelationHttpHeaders = false);
+
+//sets AutheticationApiKey for QuickPulse
+services.ConfigureTelemetryModule<QuickPulseTelemetryModule>( module => module.AuthenticationApiKey = "YOUR-API-KEY-HERE");
 ```
