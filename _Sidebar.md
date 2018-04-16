@@ -4,7 +4,7 @@ Documentation
 - [Getting started for a .NET Core console application](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Getting-Started-for-a-.NET-Core-console-application)
 - [Custom Configuration](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Custom-Configuration)
 - [Requests processing](https://github.com/Microsoft/ApplicationInsights-aspnet5/wiki/Requests-Processing)
-- [Dependency Tracking and Performance Counters](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Dependency-Tracking-and-Performance-Counter-Collection)
+- [Auto-Collection Modules](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Auto-collection-modules---Dependencies,-Live-metrics-and-more.)
 - [Telemetry Processors: Sampling and Metrics Stream](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Telemetry-Processors:-Sampling-and-Metrics-Stream)
 - [Logging](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Logging)
 - [FAQs](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/FAQs)
