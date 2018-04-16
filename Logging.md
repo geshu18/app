@@ -5,7 +5,7 @@ Following shows how to configure Application Insights to collect traces logged v
 
 This document assumes that application insights instrumentation key is configured already using instructions [here](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Getting-Started-for-a-ASP.NET-CORE-2.0-WebApp) 
 
-Application Insights SDK for Asp.Net Core provides an extension method ```ILoggerFactory``` on ```ILoggerFactory``` to configure logging. Modify the ```Startup.cs``` class of your application as follows to enable Application Insights logging.
+Application Insights SDK for Asp.Net Core provides an extension method ```AddApplicationInsights``` on ```ILoggerFactory``` to configure logging. Modify the ```Startup.cs``` class of your application as follows to enable Application Insights logging.
 ```
 public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 {
