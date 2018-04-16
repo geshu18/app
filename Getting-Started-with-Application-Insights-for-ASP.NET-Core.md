@@ -1,37 +1,37 @@
 [Application Insights](https://docs.microsoft.com/azure/application-insights/app-insights-asp-net) is an extensible analytics platform that monitors the performance and usage of your live ASP.NET Core web applications.
 
-**With Asp.Net Core 2.0, ApplicationInsights is included by default when running from Visual Studio.**
-You only need to configure the instrumentation key so that telemetry is sent to ApplicationInsights service.
+**With Asp.Net Core 2.0, ApplicationInsights is included by default when running from Visual Studio 2017.**
+You only need to configure the instrumentation key so that telemetry is sent to Application Insights service.
 If instrumentation key is not added:
-* ApplicationInsights will be enabled while debugging under 
+* Application Insights will be enabled while debugging under 
 Visual Studio 2017.
-* ApplicationInsights telemetry will be shown in Visual Studio 2017. 
-* Nothing gets sent to the ApplicationInsights service, unless an instrumentation key is added.
+* Application Insights telemetry will be shown locally in Visual Studio 2017. 
+* Nothing gets sent to the Azure Application Insights service, unless an instrumentation key is added.
 
-You probably don't need to follow these manual steps below (except the instrumentation key section) unless you upgraded from a previous version.
+**If running from outside Visual Studio 2017, like from a command-line (using `dotnet run myapp.dll`) or other IDE like Visual Studio Code, then Application Insights need to be explicitly added/configured.**
 
-Follow the steps below, skippings the ones as indicated:
+Follow the steps below, skipping the ones as indicated:
 
-* Create an Application Insights resource
-* Add Application Insights NuGet package dependency to `.csproj`
-* Add Application Insights instrumentation key
-* Add Application Insights instrumentation in code  
-* Add Application Insights JavaScript instrumentation to the `_ViewImports.cshtml`,  `_Layout.cshtml`  
-
-## Create an Application Insights resource
+1. * Create an Application Insights resource
+2. * Add Application Insights NuGet package dependency to `.csproj`
+3. * Add Application Insights instrumentation key
+4. * Add Application Insights instrumentation in code  
+5. * Add Application Insights JavaScript instrumentation to the `_ViewImports.cshtml`,  `_Layout.cshtml`  
+6. * Customizing Application Insights Settings.
+## 1. Create an Application Insights resource
 
 1. Sign in to the [Microsoft Azure portal](https://portal.azure.com). (Need to [sign up](https://azure.microsoft.com/pricing/free-trial/)?)
 2. Create a new Application Insights resource. (Click **New -> Monitoring + management -> Application Insights**). Select the ASP.NET application type.
 3. In your new resource, open the **Essentials** drop-down so that you can copy the Instrumentation Key - you'll need it shortly. 
 
-## Add Application Insights NuGet package dependency to `.csproj`
+## 2. Add Application Insights NuGet package dependency to `.csproj`
 
-If the following package reference already exists in you `.csproj`, then there is no need to explicitly add ApplicationInsights package. This is a meta package
-and it contains the ApplicationInsights package.
+If the following package reference already exists in your `.csproj`, then there is no need to explicitly add Application Insights package. This is a meta package
+and it contains the Application Insights package.
 ```
 <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
 ```
-If the above package reference is not present, then add the following to explicitly add ApplicationInsights.
+If the above package reference is not present, then add the following to explicitly add Application Insights.
 
 ```
 <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.2.0" />
@@ -40,10 +40,9 @@ If the above package reference is not present, then add the following to explici
 Verify the version number: get the latest from the [Releases page](https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases). 
 
 As of now, the version of Microsoft.ApplicationInsights.AspNetCore included in Microsoft.AspNetCore.All (v2.0.0) meta package is 2.1.1.
-You can explicitly add a reference to Microsoft.ApplicationInsights.AspNetCore when you want a version higher than the one shipped with Microsoft.AspNetCore.All
-metapackage.
+You can explicitly add a reference to Microsoft.ApplicationInsights.AspNetCore when you want a version higher than the one shipped with Microsoft.AspNetCore.All metapackage. Also, starting with Asp.Net Core 2.1, this meta package will no longer contain Microsoft.ApplicationInsights.AspNetCore, so you need to add it manually to `.csproj`.
 
-## Add the instrumentation key. 
+## 3. Add the instrumentation key. 
 
 ### Option 1: Use `appsettings.json`. 
 
@@ -67,16 +66,16 @@ Both the above options work only if Application Insights is enabled is code with
 ### Option 3:
 Add instrumentation key in code while enabling ApplicationInsights instrumentation. See the following section. 
 
-## Add Application Insights instrumentation in code.
+## 4. Add Application Insights instrumentation in code.
 
 There are two options for instrumenting your code. These are intended to be mutually exclusive, only use one or the other and not both together!
 
 Both options below allow passing an instrumentation key as a parameter to the call `AddApplicationInsightsTelemetry()` or `UseApplicationInsights()`. This is required if the key
 is not set via options mentioned at the beginning.
 
-### Option 1: Program.cs (Recommended)
+### Option 1: `UseApplicationInsights` (Preferred approach if using default Application Insights settings)
 
-The preferred default mechanism is to use the `UseApplicationInsights` extension method from the `WebHostBuilder` instance.
+The easiest way is to use the `UseApplicationInsights` extension method from the `WebHostBuilder` instance.
 
 Starting with Asp.Net Core 2.0, all project templates include a call to `WebHost.CreateDefaultBuilder()` in `Program.cs` which automatically does everything needed to read settings from appsettings.json/environment variables and initialize configuration variables.
 
@@ -97,9 +96,9 @@ public static IWebHost BuildWebHost(string[] args) =>
         .Build();
 ```
 
-### Option 2: Startup.cs
+### Option 2: `AddApplicationInsightsTelemetry` (Preferred approach if customizing Application Insights settings)
 
-The older extension method `AddApplicationInsightsTelemetry` on the `IServiceCollection` is still available for customized configuration using one of its overloaded signatures.
+The extension method `AddApplicationInsightsTelemetry` on the `IServiceCollection` is recommended for customized configuration using one of its overloaded signatures.
 
 In the method `ConfigureServices` of your Startup class, add the Application Insights service as follows:
 
@@ -120,11 +119,9 @@ var Configuration= configBuilder.Build();
 services.AddApplicationInsightsTelemetry(Configuration);
 ```
 
+## 5. Add Application Insights JavaScript instrumentation to the  _ViewImports.cshtml ,  _Layout.cshtml  
 
-
-## Add Application Insights JavaScript instrumentation to the  _ViewImports.cshtml ,  _Layout.cshtml  
-
-(if present)
+This section is applicable only if you have client-side components and need to collect client side telemetry as well (like page views etc)
 
 In `_ViewImports.cshtml`, add injection:
 
@@ -144,6 +141,9 @@ In `_Layout.cshtml`, insert HtmlHelper to the end of `<head>` section but before
 * Use [Search Explorer](https://azure.microsoft.com/documentation/articles/app-insights-diagnostic-search/) to investigate individual requests, exceptions, log traces and other events.
 * Use [Metrics Explorer](https://azure.microsoft.com/documentation/articles/app-insights-metrics-explorer/) to slice and dice metrics and counts such as response times, page views and user counts.
 * [Set alerts](https://azure.microsoft.com/documentation/articles/app-insights-alerts/) to notify you when your app goes off-limits.
+
+## 6. Customizing Application Insights
+Add link to configuration
 
 ## Get more telemetry
 
