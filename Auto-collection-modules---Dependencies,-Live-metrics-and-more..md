@@ -1,3 +1,4 @@
+The following
 [Dependency tracking](https://azure.microsoft.com/documentation/articles/app-insights-dependencies/) module is enabled by default when application is targeting both .NET Core and .NET Framework.
 [Performance counter collection](https://azure.microsoft.com/documentation/articles/app-insights-web-monitor-performance/) is enabled by default in both .NET Core and .NET Framework - However there will be no perf counter collection in .NET Core as perf counters are not supported in .NET Core. Live metrics is enabled in both cases though.
 
