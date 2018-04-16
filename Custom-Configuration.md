@@ -16,23 +16,19 @@ SET ApplicationInsights:InstrumentationKey=11111111-2222-3333-4444-555555555555
 ```
 ***note:*** *Environment variable that is set by azure website (APPINSIGHTS_INSTRUMENTATIONKEY) is not supported.*
 
-Or any other configuration provider format you defined in your application (configuration setting name is ApplicationInsights:InstrumentationKey) before the call to add insights telemetry in Startup.cs:
+Or any other configuration provider format you defined in your application (configuration setting name is ApplicationInsights:InstrumentationKey) before the call to add insights telemetry in `Startup.cs`:
 ```
 services.AddApplicationInsightsTelemetry(Configuration);
 ```
 
 Code-based approach
 -------------------
-Assuming you need to change instrumentation key after Startup.cs. You need to get access to ```IServiceProvider``` to get ```TelemetryClient```. This telemetry client will be used by ApplicationInsights middleware so changing it's instrumentation key will change:
+The recommended way to modify Application Insights Configuration is by obtaining the instance of TelemetryConfiguration from DI and then modifying it.
 ```
-this.Resolver.GetService<TelemetryClient>().Context.InstrumentationKey = "11111111-2222-3333-4444-555555555555";
+var tConfig = app.ApplicationServices.GetRequiredService<TelemetryConfiguration>();
+tConfig.InstrumentationKey = "mynewikeyhere";
 ```
-
-Alternately, modify the key in the TelemetryConfiguration.Active instance directly.
-```
-TelemetryConfiguration.Active.InstrumentationKey = "ikeyhere";
-```
-
+Note: It is not recommended to modify the `TelemetryConfiguration.Active` as changes may not be picked up by the auto collection modules.
 
 Track custom trace/event/metric
 ===============================
@@ -58,18 +54,6 @@ Track event:
         return View();
     }
 
-```
-
-Add application level context properties
-========================================
-You may want to set additional properties on all telemetry data your application reports. Since it's a global setting you need to do it in "Configure" method of your Startup class:
-```
-public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
-{
-    app.ApplicationServices.GetService<TelemetryClient>().Context.Properties["Environment"] = env.EnvironmentName;
-```
-
-
 Add additional telemetry item properties
 ========================================
 Add properties for request data item
@@ -92,7 +76,6 @@ public IActionResult Index()
     this.requestTelemetry.Context.Properties["PageImportance"] = "High";
 ```
 ***Note:*** *You should not expect that ```RequestTelemetry``` will already be populated with data. Telemetry initializers will be called and will populate RequestTelemetry only when any telemetry item was tracked (send to the portal).*
-
 
 Add request-level properties for all telemetry items
 ---------------------------------------------------- 
@@ -129,26 +112,37 @@ Configure Telemetry initializers
 ## Adding new TelemetryInitializer.
 Create new Initializer.
 
-Register it into DI Containers before AddApplicationInsightsTelemetry() is called in the ConfigureServices of your Startup class.
+Register it into DI Containers before `AddApplicationInsightsTelemetry()` is called in the ConfigureServices of your Startup class.
 For eg:
 ```
+// Use this if MyCustomTelemetryInitializer can be constructed without DI injected parameters
 services.AddSingleton<ITelemetryInitializer>(new MyCustomTelemetryInitializer());
+```
+OR
+```
+// Use this if MyCustomTelemetryInitializer constructor has parameters which are DI injected.
+services.AddSingleton<ITelemetryInitializer, MyCustomTelemetryInitializer>();
 ```
 This will ensure the telemetry initializer will be part of the TelemetryConfiguration object.
 
-Alternately, one can obtain the TelemetryConfiguration object from DI and add new initializers.
+Similar approach can be used to remove all or specific TelemetryInitializers. Use the following logic **after** the call to `AddApplicationInsightsTelemetry()` is made
 
-```
-var configuration= app.ApplicationServices.GetService<TelemetryConfiguration>();
-configuration.TelemetryInitializers.Add(new MyCustomTelemetryInitializer())
-```
-
-Similar approach can be used to remove all TelemetryInitializers. (or remove a specific one)
 ``` c#
-public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
+public void ConfigureServices(IServiceCollection services)
 {
-    var configuration= app.ApplicationServices.GetService<TelemetryConfiguration>();
-    configuration.TelemetryInitializers.Clear();
+..
+services.AddApplicationInsightsTelemetry("ikey");
+// Remove a specific built-in TelemetryInitializer
+var tiToRemove = services.FirstOrDefault<ServiceDescriptor>(t => t.ImplementationType == typeof(AspNetCoreEnvironmentTelemetryInitializer));
+            if (tiToRemove != null)
+            {
+                services.Remove(tiToRemove);
+            }
+
+// or Remove all 
+services.RemoveAll(typeof(ITelemetryInitializer)); // this requires importing namespace using Microsoft.Extensions.DependencyInjection.Extensions;
+..
+}
 ```
 
 Redirect traffic to the different endpoint
@@ -178,8 +172,8 @@ var configBuilder = new ConfigurationBuilder()
 
 Configuring Telemetry Channel
 ==========================================
-Add the required channel to DI in ConfigureServices() method of your application's Startup class.
-For eg:, the following is all that's needed to configure channel
+Add the required channel to DI in ConfigureServices() method of your application's Startup class before `AddApplicationInsightsTelemetry()` call.
+For eg:, the following sets up `InMemoryChannel` with the specific `MaxTelemetryBufferCapacity`
 ```
 services.AddSingleton(typeof(ITelemetryChannel), new InMemoryChannel() {MaxTelemetryBufferCapacity = 19898 });
 ```
