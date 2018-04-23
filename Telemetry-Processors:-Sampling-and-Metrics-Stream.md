@@ -5,7 +5,7 @@ Following shows the process of adding additional Telemetry processors to the `Te
 
 # Adding a Custom Telemetry Processor to telemetry pipeline
 
-Custom telemetry processors can be created to enable the process of filtering the telemetry, as described in [Create Custom Telemetry Processor](https://azure.microsoft.com/en-us/documentation/articles/app-insights-api-filtering-sampling/#filtering-itelemetryprocessor). Custom telemetry processors can be added to the `TelemetryConfiguration` by using the extension method `AddApplicationInsightsTelemetryProcessor` in the `ConfigureServices` method of Application's Startup class as shown below.
+Custom telemetry processors can be created to enable the process of filtering the telemetry, as described in [Create Custom Telemetry Processor](https://azure.microsoft.com/en-us/documentation/articles/app-insights-api-filtering-sampling/#filtering-itelemetryprocessor). Custom telemetry processors can be added to the `TelemetryConfiguration` by using the extension method `AddApplicationInsightsTelemetryProcessor` on `IServiceCollection`. Use the following example in `ConfigureServices` method of Application's Startup class to add TelemetryProcessors.
 
 ``` c#
 public void ConfigureServices(IServiceCollection services)
