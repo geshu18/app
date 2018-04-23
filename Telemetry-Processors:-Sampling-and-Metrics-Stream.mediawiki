@@ -6,19 +6,16 @@ Telemetry processors, are configured as a part of telemetry configuration. Once 
 
 ## Accessing Telemetry Configuration
 
-Telemetry configuration can be accessed either using ```Active```
+The recommended way of obtaining `TelemetryConfiguration` object is by asking for it from DI in the `Configure` method of Application's Startup class as shown below
 
 ``` c#
-var telemetryConfiguration = TelemetryConfiguration.Active
-``` 
-
-or by getting it through application builder services
-
-``` c#
-public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
-    var configuration= app.ApplicationServices.GetService<TelemetryConfiguration>();
-```
+...
+var configuration = app.ApplicationServices.GetService<TelemetryConfiguration>();
+...
+}
+``` 
 
 ## Using Custom Telemetry Processor
 
