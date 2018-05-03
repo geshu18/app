@@ -50,6 +50,9 @@ The above code will disable sampling feature. Follow steps below to add sampling
 ### Configure Sampling settings
 Use extension methods of ```TelemetryProcessorChainBuilder``` as shown below to customize sampling behavior.
 
+****IMPORTANT****
+**If using this method to configure sampling, please make sure to use aiOptions.EnableAdaptiveSampling = false; settings with AddApplicationInsightsTelemetry().**
+
 ``` c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
