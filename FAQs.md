@@ -27,7 +27,8 @@ This is especially true from 2.3.0-beta1 onwards as this PR introduces changes s
 https://github.com/Microsoft/ApplicationInsights-aspnetcore/pull/622
 
 ## 3. Unable to see Live Metrics (Quick Pulse) for Asp.Net Core Application?
-Livemetrics support was enabled for .NET Core apps from 2.2.0-beta1 SDK onwards only. (For Asp.Net Core apps targettingfull framework like NET57, live metrics works even before) (https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases/tag/v2.2.0-beta1)
+Livemetrics support was enabled for .NET Core apps from 2.2.0-beta1 SDK onwards only. (For Asp.Net Core apps targetting full framework like NET47, live metrics worked even before) 
+(https://github.com/Microsoft/ApplicationInsights-aspnetcore/releases/tag/v2.2.0-beta1)
 
 Please update to 2.2.1, the latest stable SDK containing LiveMetrics (https://www.nuget.org/packages/Microsoft.ApplicationInsights.AspNetCore/2.2.1) 
 
