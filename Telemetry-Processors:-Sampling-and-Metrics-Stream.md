@@ -71,7 +71,7 @@ builder.Build();
 
 ```
 
-If using the above method to configure sampling, please make sure to use ```aiOptions.EnableAdaptiveSampling = false;``` settings with AddApplicationInsightsTelemetry(). Without this, there would be multiple sampling processors in the TelemetryProcessor chain leading to unintended consequences.
+**If using the above method to configure sampling, please make sure to use ```aiOptions.EnableAdaptiveSampling = false;``` settings with AddApplicationInsightsTelemetry().** Without this, there would be multiple sampling processors in the TelemetryProcessor chain leading to unintended consequences.
 
 
 ## Metrics Stream
