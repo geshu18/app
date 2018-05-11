@@ -34,7 +34,7 @@ Track custom trace/event/metric
 ===============================
 Please refer to [Application Insights custom metrics API reference](http://azure.microsoft.com/en-us/documentation/articles/app-insights-custom-events-metrics-api/) for description of custom data reporting in Application Insights.
 
-Get TelemetryClient using dependency injection: 
+Get TelemetryClient using constructor dependency injection: 
 ``` c#
 public class HomeController : Controller
 {
@@ -45,37 +45,14 @@ public class HomeController : Controller
         this.telemetry = telemetry;
     }
 ```
-
-Track event:
+Track event or any methods on `TelemetryClient`:
 ```
     public IActionResult Index()
     {
         this.telemetry.TrackEvent("HomePageRequested");
         return View();
     }
-
-Add additional telemetry item properties
-========================================
-Add properties for request data item
-------------------------------------
-If you want to add additional properties for request telemetry you need to get an instance of ```RequestTelemetry``` from ```HttpContext.Features```:
-``` c#
-public class HomeController : Controller
-{
-    private RequestTelemetry requestTelemetry;
-
-    public HomeController()
-    {
-        this.requestTelemetry = HttpContext.Features.Get<RequestTelemetry>();
-    }
 ```
-and then add required properties:
-```
-public IActionResult Index()
-{
-    this.requestTelemetry.Context.Properties["PageImportance"] = "High";
-```
-***Note:*** *You should not expect that ```RequestTelemetry``` will already be populated with data. Telemetry initializers will be called and will populate RequestTelemetry only when any telemetry item was tracked (send to the portal).*
 
 Add request-level properties for all telemetry items
 ---------------------------------------------------- 
@@ -100,11 +77,12 @@ public class PropertyTelemetryInitializer : ITelemetryInitializer
 ```
 Secondly, register your telemetry initializer into global collection:
 ```
-public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory)
+public void ConfigureServices(IServiceCollection services)
 {
-    var initializer = new PropertyTelemetryInitializer(app.ApplicationServices.GetService<IHttpContextAccessor>());
-    var configuration= app.ApplicationServices.GetService<TelemetryConfiguration>();
-    configuration.TelemetryInitializers.Add(initializer);
+services.AddSingleton<ITelemetryInitializer, PropertyTelemetryInitializer>();
+services.AddApplicationInsightsTelemetry()
+...
+}
 ``` 
 
 Configure Telemetry initializers
