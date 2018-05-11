@@ -1,5 +1,7 @@
 The following auto-collection modules are enabled by default for Asp.Net Core Apps with either `UseApplicationInsights()` or `AddApplicationInsightsTelemetry()` methods of enabling Application Insights.
 
+RequestTrackingTelemetryModule - Collects information about Requests incoming to your application. This module works from subscribing to `DiagnosticSource` events publishing by the Asp.Net Core Host.
+
 [DependencyTrackingTelemetryModule](https://azure.microsoft.com/documentation/articles/app-insights-dependencies/)
 
 [PerformanceCollectorModule](https://azure.microsoft.com/documentation/articles/app-insights-web-monitor-performance/) only if the application is targeting the full .NET Framework as there is no perf counter collection in .NET Core
