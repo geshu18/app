@@ -17,3 +17,29 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 This above snippet causes all messages (Warning or above) to be sent to Application Insights. 
 
 As of today, this is the only way to enable application insights traces. We will be adding new extension methods on ```ILoggingBuilder``` [soon](https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/536).
+
+# Include EventId in logs
+
+It is possible to include ```EventId``` in telemetry properties. Simply setup ```ApplicationInsightsLoggerOptions``` instance in ```Startup.ConfigureServices``` method.
+
+```
+services.AddOptions<ApplicationInsightsLoggerOptions>().Configure(o => o.IncludeEventId = true);
+```
+
+Also it is possible to read configuration from configuration file.
+
+At first add code into ```Startup.ConfigureServices``` method.
+
+```
+services.AddOptions<ApplicationInsightsLoggerOptions>().Bind(Configuration.GetSection("ApplicationInsightsLogger"));
+```
+
+Then change your configuration file:
+
+```
+{
+  "ApplicationInsightsLogger": {
+    "IncludeEventId": true
+  }
+}
+```
