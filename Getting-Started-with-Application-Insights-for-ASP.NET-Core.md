@@ -57,46 +57,40 @@ telemetry to be sent to ApplicationInsights service.
   }
 }
 ```
-### Option 2:
+### Option 2: Environment Variable
 Set instrumentation key into environment variable  ApplicationInsights:InstrumentationKey
 eg:set ApplicationInsights:InstrumentationKey=ikeygoeshere
 
-Both the above options work only if Application Insights is enabled is code with UseApplicationInsights() extension. As of now its not supported with AddApplicationInsightsTelemetry() as mentioned [here](https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/605) - Update 2.3.0 fixes this issue.
+Both the above options work only if Application Insights is enabled is code with UseApplicationInsights() extension. As of now its not supported with AddApplicationInsightsTelemetry() as mentioned here - Update 2.3.0 fixes this issue.
 
-### Option 3:
+### Option 3: Via Code
 Add instrumentation key in code while enabling ApplicationInsights instrumentation. See the following section. 
 
 ## 4. Add Application Insights instrumentation in code.
 
-There are two options for instrumenting your code. These are intended to be mutually exclusive, only use one or the other and not both together!
+There are two options for instrumenting your code. These are mutually exclusive, only use one or the other and not both!
 
 Both options below allow passing an instrumentation key as a parameter to the call `AddApplicationInsightsTelemetry()` or `UseApplicationInsights()`. This is required if the key
-is not set via options mentioned at the beginning.
+is not set via options mentioned previously.
 
-### Option 1: `UseApplicationInsights` (Preferred approach if using default Application Insights settings)
+### Option 1: `UseApplicationInsights` (Preferred if using default Application Insights settings)
 
 The easiest way is to use the `UseApplicationInsights` extension method from the `WebHostBuilder` instance.
 
-Starting with Asp.Net Core 2.0, all project templates include a call to `WebHost.CreateDefaultBuilder()` in `Program.cs` which automatically does everything needed to read settings from appsettings.json/environment variables and initialize configuration variables.
+Starting with Asp.Net Core 2.0, all project templates include a call to `WebHost.CreateDefaultBuilder()` in `Program.cs`.
+Add `UseApplicationInsights()` here to configure ApplicationInsights.
+This will automatically read settings from appsettings.json/environment variables and initialize configuration variables.
 
-```C#            
-public static IWebHost BuildWebHost(string[] args) =>
-    WebHost.CreateDefaultBuilder(args)
-        .UseStartup<Startup>()
-        .Build();       
-```
-
-Modify the above code as follows to configure ApplicationInsights.
 
 ```C#
 public static IWebHost BuildWebHost(string[] args) =>
     WebHost.CreateDefaultBuilder(args)
         .UseStartup<Startup>()
-        .UseApplicationInsights()
+        .UseApplicationInsights() // Enable Application Insights
         .Build();
 ```
 
-### Option 2: `AddApplicationInsightsTelemetry` (Preferred approach if customizing Application Insights settings)
+### Option 2: `AddApplicationInsightsTelemetry` (Preferred if customizing Application Insights settings)
 
 The extension method `AddApplicationInsightsTelemetry` on the `IServiceCollection` is recommended for customized configuration using one of its overloaded signatures.
 
@@ -143,7 +137,7 @@ In `_Layout.cshtml`, insert HtmlHelper to the end of `<head>` section but before
 * [Set alerts](https://azure.microsoft.com/documentation/articles/app-insights-alerts/) to notify you when your app goes off-limits.
 
 ## 6. Customizing Application Insights
-Add link to configuration
+TODO: Add link to configuration
 
 ## Get more telemetry
 
