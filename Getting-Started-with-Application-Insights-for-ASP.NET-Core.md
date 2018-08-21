@@ -58,8 +58,7 @@ telemetry to be sent to ApplicationInsights service.
 }
 ```
 ### Option 2: Environment Variable
-Set instrumentation key into environment variable  ApplicationInsights:InstrumentationKey
-eg:set ApplicationInsights:InstrumentationKey=ikeygoeshere
+Set instrumentation key into environment variable `APPINSIGHTS_INSTRUMENTATIONKEY`.
 
 Both the above options work only if Application Insights is enabled is code with UseApplicationInsights() extension. As of now its not supported with AddApplicationInsightsTelemetry() as mentioned here - Update 2.3.0 fixes this issue.
 
