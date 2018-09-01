@@ -27,7 +27,9 @@ As of today, this is the only way to enable application insights traces. We will
 It is possible to include `EventId` in telemetry properties. Simply setup `ApplicationInsightsLoggerOptions` instance in `Startup.ConfigureServices` method.
 
 ``` csharp
-services.AddOptions<ApplicationInsightsLoggerOptions>().Configure(o => o.IncludeEventId = true);
+services
+    .AddOptions<ApplicationInsightsLoggerOptions>()
+    .Configure(o => o.IncludeEventId = true);
 ```
 
 Also it is possible to read configuration from configuration file.
