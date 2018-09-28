@@ -49,7 +49,7 @@ metapackage.
 
 You can control whether telemetry is sent to ApplicationInsights service by setting/not setting instrumentation key. You
 may have separate `appsettings.json` for each environment, and each can contain different instrumentation keys, or do not contain anything at all if you do not want
-telemetry to be sent to ApplicationInsights service.
+telemetry to be sent to the ApplicationInsights service.
 
 ```JSON
 {
@@ -61,7 +61,7 @@ telemetry to be sent to ApplicationInsights service.
 ### Option 2:
 Set instrumentation key into environment variable `APPINSIGHTS_INSTRUMENTATIONKEY`.
 
-Both the above options work only if Application Insights is enabled is code with UseApplicationInsights() extension. As of now its not supported with AddApplicationInsightsTelemetry() as mentioned [here](https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/605)
+Both the above options work only if Application Insights is enabled in code with the `UseApplicationInsights()` extension. As of now it's not supported with `AddApplicationInsightsTelemetry()` as mentioned [here].(https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/605)
 
 ### Option 3:
 Add instrumentation key in code while enabling ApplicationInsights instrumentation. See the following section. 
