@@ -71,7 +71,7 @@ public class PropertyTelemetryInitializer : ITelemetryInitializer
 
     public void Initialize(ITelemetry telemetry)
     {
-        telemetry.Context.Properties["tenantName"] = httpContextAccessor.Value.Items["tenantName"].ToString();
+        telemetry.Context.Properties["tenantName"] = httpContextAccessor.HttpContext.Items["tenantName"].ToString();
     }
 }
 ```
@@ -80,7 +80,7 @@ Secondly, register your telemetry initializer into global collection:
 public void ConfigureServices(IServiceCollection services)
 {
 services.AddSingleton<ITelemetryInitializer, PropertyTelemetryInitializer>();
-services.AddApplicationInsightsTelemetry()
+services.AddApplicationInsightsTelemetry();
 ...
 }
 ``` 
