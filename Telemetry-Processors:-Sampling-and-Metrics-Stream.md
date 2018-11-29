@@ -59,6 +59,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 var configuration = app.ApplicationServices.GetService<TelemetryConfiguration>();
 
 var builder = configuration .TelemetryProcessorChainBuilder;
+// version 2.5.0-beta2 and above should use the following line instead of above. (https://github.com/Microsoft/ApplicationInsights-aspnetcore/blob/develop/CHANGELOG.md#version-250-beta2)
+// var builder = configuration.DefaultTelemetrySink.TelemetryProcessorChainBuilder;
 
 // Using adaptive sampling
 builder.UseAdaptiveSampling(maxTelemetryItemsPerSecond:10);
