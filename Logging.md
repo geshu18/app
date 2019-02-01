@@ -1,3 +1,7 @@
+{Deprecated}
+This contents are now being deprecated. It is recommended to use https://www.nuget.org/packages/Microsoft.Extensions.Logging.ApplicationInsights/ package with instructions from here:
+https://github.com/Microsoft/ApplicationInsights-dotnet-logging/blob/develop/src/ILogger/Readme.md
+
 Application Insights SDK is capable of collecting Trace telemetry from logs generated via Asp.Net Core's [logging infrastructure](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging).
 When running the application from Visual Studio IDE, all traces logged via `ILogger` interface are automatically captured. If an instrumentation key is configured, then these traces are sent to the Application Insights service. To limit the level of logging captured by Application Insights when run from Visual Studio see this [issue](https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/603)
 
