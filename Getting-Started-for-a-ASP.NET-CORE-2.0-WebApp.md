@@ -115,7 +115,7 @@ This method has an override which can accept configuration as well.
 var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(this.hostingEnvironment.ContentRootPath)
                 .AddEnvironmentVariables();
-var Configuration= configBuilder.Build();
+var Configuration = configBuilder.Build();
 services.AddApplicationInsightsTelemetry(Configuration);
 ```
 
