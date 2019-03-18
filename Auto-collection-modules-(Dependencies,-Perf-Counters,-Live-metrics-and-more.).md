@@ -41,6 +41,6 @@ public void ConfigureServices(IServiceCollection services)
 services.AddApplicationInsightsTelemetry("ikey");
 services.ConfigureTelemetryModule<DependencyTrackingTelemetryModule>( module => module.SetComponentCorrelationHttpHeaders = false);
 
-//sets AutheticationApiKey for QuickPulse
+//sets AuthenticationApiKey for QuickPulse
 services.ConfigureTelemetryModule<QuickPulseTelemetryModule>( module => module.AuthenticationApiKey = "YOUR-API-KEY-HERE");
 ```
