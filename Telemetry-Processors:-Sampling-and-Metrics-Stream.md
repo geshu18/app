@@ -23,6 +23,10 @@ public void ConfigureServices(IServiceCollection services)
 
 # Sampling
 
+This content is being deprecated. Please follow official docs page:
+https://docs.microsoft.com/en-us/azure/azure-monitor/app/sampling#how-do-i-know-whether-sampling-is-in-operation
+
+-----
 [Sampling](https://azure.microsoft.com/en-us/documentation/articles/app-insights-sampling) is achieved through telemetry processors. Two basic types of sampling are available:
 
 * [Fixed rate sampling](https://azure.microsoft.com/en-us/documentation/articles/app-insights-sampling/#fixed-rate-sampling-for-aspnet-web-sites)
