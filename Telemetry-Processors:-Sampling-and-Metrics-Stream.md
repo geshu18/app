@@ -1,3 +1,7 @@
+Please follow official docs here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core-no-visualstudio
+
+The contents of this is wiki is no longer updated.
+
 [Telemetry Processors](https://azure.microsoft.com/en-us/documentation/articles/app-insights-api-filtering-sampling/#filtering-itelemetryprocessor) are enabled in ASP.NET Core on both .NET Framework and .NET Core.
 
 Following shows the process of adding additional Telemetry processors to the `TelemetryConfiguration`.
