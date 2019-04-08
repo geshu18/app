@@ -1,3 +1,7 @@
+Please follow official docs here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core-no-visualstudio
+
+The contents of this is wiki is no longer updated.
+
 Set your Instrumentation Key
 ============================
 There are two ways to set instrumentation key - using configuration or via code
