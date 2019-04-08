@@ -1,3 +1,8 @@
+Please follow official docs here: https://docs.microsoft.com/en-us/azure/azure-monitor/app/asp-net-core-no-visualstudio
+
+The contents of this is wiki is no longer updated.
+
+
 [Application Insights](https://docs.microsoft.com/azure/application-insights/app-insights-asp-net) is an extensible analytics platform that monitors the performance and usage of your live ASP.NET Core web applications.
 
 **With Asp.Net Core 2.0, ApplicationInsights is included by default when running from Visual Studio 2017.**
